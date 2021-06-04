@@ -1,0 +1,15 @@
+*.kdev4
+node_modules/
+build/
+.kdev4/
+test/visual-output/*
+!test/visual-output/.gitkeep
+test/tmp
+*.kate-swp
+.vscode/
+
+# Debug output
+*.callgrind.out.*
+
+# NPM package
+*.tgz

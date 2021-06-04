@@ -1,0 +1,40 @@
+{
+  "name": "jimp-native",
+  "version": "0.0.1",
+  "description": "Speed up Jimp operations by using native C++ code where it matters.",
+  "main": "index.js",
+  "gypfile": true,
+  "scripts": {
+    "test": "node ./test/test.js",
+    "rebuild": "node-gyp -j max rebuild",
+    "build": "node-gyp -j max build",
+    "rebuild:debug": "node-gyp -j max rebuild --debug",
+    "build:debug": "node-gyp -j max build --debug",
+    "clean": "node-gyp clean",
+    "bench:singlethreaded": "node ./benchmark/bench-single-threaded",
+    "bench:multithreaded": "node ./benchmark/bench-multi-threaded"
+  },
+  "keywords": [
+    "image processing",
+    "native",
+    "jimp",
+    "images",
+    "c++",
+    "resize",
+    "scale",
+    "blit",
+    "composite",
+    "rotate"
+  ],
+  "author": "Sjoerd Dal",
+  "license": "MIT",
+  "dependencies": {
+    "jimp": "0.16.1"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.1",
+    "draftlog": "^1.0.13",
+    "node-addon-api": "^3.2.1",
+    "node-gyp": "^8.1.0"
+  }
+}

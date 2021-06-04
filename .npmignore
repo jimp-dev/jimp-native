@@ -1,0 +1,12 @@
+# Development related files
+*.kdev4
+.kdev4/
+.vscode/
+
+# Not needed in production
+test/
+node_modules/
+build/
+benchmark/
+examples/
+*.tgz
