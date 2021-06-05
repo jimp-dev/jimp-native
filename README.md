@@ -94,7 +94,7 @@ Aside from raw throughput, another advantage of multithreading is that when your
 If you're already using callbacks and were using them as if they provided async behaviour, then you should be good to go. Here's an example of using the library in `true-async` mode:
 
 ```javascript
-const Jimp = require('../true-async');
+const Jimp = require('jimp-native/true-async');
 const path = require('path');
 
 function onDone(err, image) {
@@ -136,7 +136,7 @@ Jimp
 Alternatively, if you prefer async/await then you can use {methodName}Async for any optimized function available and use them as a promise:
 
 ```Javascript
-const Jimp = require('../true-async');
+const Jimp = require('jimp-native/true-async');
 const path = require('path');
 
 async function run () {
