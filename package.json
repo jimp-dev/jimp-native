@@ -1,6 +1,6 @@
 {
   "name": "jimp-native",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Speed up Jimp operations by using native C++ code where it matters.",
   "main": "index.js",
   "gypfile": true,
