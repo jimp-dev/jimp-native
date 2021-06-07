@@ -10,7 +10,7 @@
  * The original code is available here: https://raw.githubusercontent.com/guyonroche/imagejs/master/lib/resize.js under
  * the following license:
  *
- * Copyright (c) 2015 Guyon Roche
+ * Copyright (c) 2015 guyonroche
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

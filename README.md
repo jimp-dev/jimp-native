@@ -2,7 +2,7 @@
 
 ## Make your sever-side Jimp code run 10x faster!
 
-Jimp-native is a fast C++ re-implementation of Jimp with zero system dependencies and little overhead!
+Jimp-native is a fast C++ re-implementation of [Jimp](https://github.com/oliver-moran/jimp/tree/master/packages) with zero system dependencies and minimal overhead!
 
 ## How do I start using it?
 
@@ -70,6 +70,7 @@ Aside from raw throughput, another advantage of multithreading is that when your
   * convolute ✅
   * colour/color ⛔
 * contain 🟨 (uses resize internally so it's covered)
+* cover 🟨 (crop and resize internally so it's covered)
 * crop ✅
   * crop ✅
   * autocrop ✅
@@ -168,3 +169,12 @@ Here are some things I'd like to look into doing with this project:
 * Explore potential port to web assembly (I'm not familiar with WASM, I'm not sure how feasible it is)
 * Optimize default resize algorithm further (It beats JS, but it I feel like it can be a lot better)
 * Improve the testing harness and benchmarking tool
+
+## Licensing
+
+Most C++ optimized functions are based on their JavaScript equivalents in [Jimp](https://github.com/oliver-moran/jimp/tree/master/packages). Jimp and Jimp native are both available under the MIT license. For the original license, see [ORIGINAL_JIMP_LICENSE](https://github.com/sjoerd108/jimp-native/blob/main/ORIGINAL_JIMP_LICENSE), for the license that applies to this port, see [LICENSE](https://github.com/sjoerd108/jimp-native/blob/main/LICENSE).
+
+Jimp also contains portions of source code from other projects. C++ ports of this code will be marked with licensing info where applicable. External projects that have been partially ported to work with Jimp native include:
+
+  * [ImageJS](https://github.com/guyonroche/imagejs) - All resize algorithms except the default bilinear algorithm are from this project. ImageJS is available under the MIT license (See [IMAGEJS_LICENSE](https://github.com/sjoerd108/jimp-native/blob/main/IMAGEJS_LICENSE)). Links: [C++ source](https://github.com/sjoerd108/jimp-native/blob/main/cppsrc/util/imagejsPort.cpp), [Jimp source](https://raw.githubusercontent.com/oliver-moran/jimp/v0.16.1/packages/plugin-resize/src/modules/resize2.js), [Original source](https://raw.githubusercontent.com/guyonroche/imagejs/master/lib/resize.js).
+  * [JS-Image-Resizer](https://github.com/taisel/JS-Image-Resizer) - Jimp will use the resize algorithm from this project when no algorithm is specified (not this is not the same algorithm as when ``'bilinearInterpolation'`` is specified). JS-Image-Resizer is in the public domain. Links: [C++ source](https://github.com/sjoerd108/jimp-native/blob/main/cppsrc/util/jsImageResizerPort.cpp), [Jimp source](https://github.com/oliver-moran/jimp/blob/v0.16.1/packages/plugin-resize/src/modules/resize.js), [Original source](https://raw.githubusercontent.com/taisel/JS-Image-Resizer/master/resize.js).

@@ -7,10 +7,10 @@
   * interpolation techniques in each direction depending on if the image is upscaled or downscaled in said direction.
   *
   * Original code in the JIMP codebase is based on JS-Image-Resizer. JS-Image-Resizer was released to public domain on
-  * 29 July 2013.
+  * 29 July 2013. Original source code can be found here: https://github.com/taisel/JS-Image-Resizer.
   *
-  * JavaScript Image Resizer (c) 2012 - Grant Galitz
   * C++ port (c) 2021 Sjoerd Dal
+  * JavaScript Image Resizer (c) 2012 - Grant Galitz
   */
 void defaultResize(Image& src, Image& dst) {
     bool skipWidth = src.width == dst.width;
