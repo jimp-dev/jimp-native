@@ -1,5 +1,5 @@
 #include "colour.hpp"
-#include "../util/colour.hpp"
+#include "../util/colourUtil.hpp"
 #include <cmath>
 
 void brightness(uint8_t* pixelData, size_t rgbaArrayLength, double brightness) {

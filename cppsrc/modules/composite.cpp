@@ -1,5 +1,5 @@
 #include "composite.hpp"
-#include "../util/colour.hpp"
+#include "../util/colourUtil.hpp"
 
 void composite(Image& sourceImage, Image& destImage, long xOffset, long yOffset, CompositeMode mode, double opacitySource) {
     for(long y = 0; sourceImage.height > y; y++) {

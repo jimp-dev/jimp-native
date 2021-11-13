@@ -1,6 +1,6 @@
 #include "crop.hpp"
 #include "cmath"
-#include "../util/colour.hpp"
+#include "../util/colourUtil.hpp"
 
 void crop (Image& image, long xOffset, long yOffset, long width, long height) {
     width = std::max(std::min(width, image.width), (long) 0);

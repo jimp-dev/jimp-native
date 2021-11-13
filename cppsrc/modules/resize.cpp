@@ -1,5 +1,5 @@
 #include "resize.hpp"
-#include "../util/colour.hpp"
+#include "../util/colourUtil.hpp"
 #include "../util/imagejsPort.hpp"
 #include "../util/jsImageResizerPort.hpp"
 #include <cmath>

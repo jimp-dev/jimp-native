@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 
 const SOURCE_LOCATION = path.join(__dirname, 'cppsrc');
-const HEADER_FILE_EXTENSION = '.hpp';
 const SOURCE_FILE_EXTENSION = '.cpp';
 
 const result = [];
@@ -14,7 +13,7 @@ function searchRecursive(basePath) {
         if (fs.statSync(entryPath).isDirectory()) {
             searchRecursive(entryPath);
         } else {
-            if (entryPath.endsWith(HEADER_FILE_EXTENSION) || entryPath.endsWith(SOURCE_FILE_EXTENSION)) {
+            if (entryPath.endsWith(SOURCE_FILE_EXTENSION)) {
                 result.push(entryPath);
             }
         }

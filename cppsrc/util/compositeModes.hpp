@@ -1,5 +1,5 @@
 #pragma once
-#include "colour.hpp"
+#include "colourUtil.hpp"
 
 enum CompositeModes {
     BLEND_SOURCE_OVER = 0,

@@ -1,6 +1,6 @@
 {
   "name": "jimp-native",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Speed up Jimp operations by using native C++ code where it matters.",
   "main": "index.js",
   "gypfile": true,
@@ -31,10 +31,10 @@
   "dependencies": {
     "jimp": "0.16.1",
     "node-addon-api": "^3.2.1",
-    "node-gyp": "^8.1.0"
+    "node-gyp": "^8.4.0"
   },
   "devDependencies": {
-    "chalk": "^4.1.1",
+    "chalk": "^4.1.2",
     "draftlog": "^1.0.13"
   },
   "homepage": "https://github.com/sjoerd108/jimp-native#readme",
