@@ -1,9 +1,15 @@
 
 # Changelog
 
+## v0.0.6 - 2022-06-18
+
+- Fixed an issue with EDGE_WRAP mode for edge handling if negative x/y is more than the image width/height, which could
+lead to reading outside the image buffer.
+- Updated dependencies
+
 ## v0.0.5 - 2022-05-04
 
-- Changed addon so that its safe to use from within Node.js workers.
+- Changed addon so that it's safe to use from within Node.js workers.
 - Updated Node Addon API to v5 (Min node.js version is now v12)
 - Updated node-gyp
 - Added this changelog :)

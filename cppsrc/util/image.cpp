@@ -117,13 +117,13 @@ long Image::getPixelIndex(long x, long y, EdgeHandling edgeHandling) {
         }
         case EDGE_WRAP: {
             if (x < 0) {
-                x += width;
+                x = (x % width + width) % width;
             } else if (x >= width) {
                 x %= width;
             }
 
             if (y < 0) {
-                y += height;
+                y = (y % height + height) % height;
             } else if (y >= height) {
                 y %= height;
             }
@@ -136,7 +136,7 @@ long Image::getPixelIndex(long x, long y, EdgeHandling edgeHandling) {
 uint8_t* Image::getPixelAt(long x, long y, EdgeHandling edgeHandling, uint8_t* none) {
     long index = getPixelIndex(x, y, edgeHandling);
 
-    if (index == -1) {
+    if (index < 0 || index >= rgbaArrayLength) {
         return none;
     }
 
