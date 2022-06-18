@@ -19,5 +19,14 @@
         'msvs_settings': {
             'VCCLCompilerTool': { 'ExceptionHandling': 1, 'AdditionalOptions': ['-std:c++17'] },
         },
+        'conditions': [
+            ['OS=="mac"', {
+                'xcode_settings': {
+                    'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
+                    'MACOSX_DEPLOYMENT_TARGET': '10.14',
+                    'CLANG_CXX_LANGUAGE_STANDARD': 'c++17',
+                }
+            }]
+        ]
     }]
 }
