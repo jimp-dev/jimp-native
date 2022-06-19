@@ -1,6 +1,10 @@
 
 # Changelog
 
+## v0.0.7 - 2022-06-19
+
+- Fixed build errors on MacOS (thanks [@liarco](https://github.com/liarco))
+
 ## v0.0.6 - 2022-06-18
 
 - Fixed an issue with EDGE_WRAP mode for edge handling if negative x/y is more than the image width/height, which could
