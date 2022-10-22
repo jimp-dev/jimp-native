@@ -1,6 +1,10 @@
 
 # Changelog
 
+## v0.0.8 - 2022-10-22
+
+- Updated upstream Jimp, fixing an NPM audit security warning.
+
 ## v0.0.7 - 2022-06-19
 
 - Fixed build errors on MacOS (thanks [@liarco](https://github.com/liarco))
