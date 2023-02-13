@@ -1,0 +1,30 @@
+{
+  "name": "@jimp-native/plugin-blit-napi",
+  "version": "1.0.0",
+  "description": "C++ implementation of plugin-blit using the Node Addon API",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "module": "es/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node-gyp rebuild -j max",
+    "clean": "rimraf ./dist ./es ./build",
+    "build": "npm run clean && npm run build:node && npm run build:module && npm run build:cpp",
+    "build:cpp": "node-gyp rebuild -j max",
+    "build:cpp:debug": "node-gyp -j max rebuild --debug",
+    "build:watch": "npm run build:node:debug -- -- --watch --verbose",
+    "build:debug": "npm run build:node:debug",
+    "build:module": "cross-env BABEL_ENV=module babel src -d es --extensions \".ts\" --source-maps --config-file ../../babel.config.js",
+    "build:node": "babel src -d dist --source-maps --extensions \".ts\" --config-file ../../babel.config.js"
+  },
+  "dependencies": {
+    "@jimp-native/plugin-blit-cpp": "*",
+    "@jimp-native/utils-cpp": "^1.0.0",
+    "@jimp-native/utils-napi": "*",
+    "@jimp-native/utils-ts": "*",
+    "@jimp/utils": "^0.22.4",
+    "jimp": "^0.22.4"
+  },
+  "author": "Sjoerd Dal",
+  "license": "MIT"
+}

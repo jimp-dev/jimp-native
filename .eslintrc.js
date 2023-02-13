@@ -5,7 +5,7 @@ module.exports = {
         "es6": true
     },
     "parserOptions": {
-        "ecmaVersion": 2020
+        "ecmaVersion": 2022
     },
     "rules": {
         // enable additional rules

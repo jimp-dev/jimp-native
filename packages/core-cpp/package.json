@@ -1,0 +1,13 @@
+{
+  "name": "native-core",
+  "version": "1.0.0",
+  "description": "Core Jimp methods with C++ optimisations",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sjoerd Dal",
+  "license": "MIT",
+  "dependencies": {
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@jimp-native/utils-napi",
+  "version": "1.0.0",
+  "description": "C++ utilities for optimisations built on top of the Node Addon API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@jimp-native/utils-cpp": "*",
+    "node-addon-api": "^6.0.0"
+  },
+  "author": "Sjoerd Dal",
+  "license": "MIT"
+}

@@ -2,8 +2,7 @@
 node_modules/
 build/
 .kdev4/
-test/visual-output/*
-!test/visual-output/.gitkeep
+
 test/tmp
 *.kate-swp
 .vscode/
@@ -13,3 +12,6 @@ test/tmp
 
 # NPM package
 *.tgz
+
+dist/
+es/

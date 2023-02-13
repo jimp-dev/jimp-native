@@ -1,0 +1,14 @@
+{
+  "name": "@jimp-native/plugin-blit-cpp",
+  "version": "1.0.0",
+  "description": "Platform agnostic C++ implementation of plugin-blit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sjoerd Dal",
+  "license": "MIT",
+  "dependencies": {
+    "@jimp-native/utils-cpp": "*"
+  }
+}

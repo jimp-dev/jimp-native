@@ -1,0 +1,35 @@
+{
+  "name": "jimp-native",
+  "version": "1.0.0",
+  "description": "\"Speed up Jimp operations by using native C++ code where it matters",
+  "main": "dist/index.js",
+  "module": "es/index.js",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "node ./test/test.js",
+    "clean": "rimraf ./dist ./es ./build",
+    "build": "npm run clean && npm run build:node && npm run build:module",
+    "build:watch": "npm run build:node:debug -- -- --watch --verbose",
+    "build:debug": "npm run build:node:debug",
+    "build:module": "cross-env BABEL_ENV=module babel src -d es --extensions \".ts\" --source-maps --config-file ../../babel.config.js",
+    "build:node": "babel src -d dist --source-maps --extensions \".ts\" --config-file ../../babel.config.js"
+  },
+  "keywords": [
+    "image processing",
+    "C++",
+    "jimp",
+    "images",
+    "resize",
+    "scale",
+    "blit",
+    "composite",
+    "rotate"
+  ],
+  "author": "Sjoerd Dal",
+  "license": "MIT",
+  "dependencies": {
+    "@jimp-native/plugins-napi": "^1.0.0",
+    "@jimp/custom": "^0.22.4",
+    "@jimp/types": "^0.22.4"
+  }
+}

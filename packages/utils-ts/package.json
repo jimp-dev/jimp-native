@@ -1,0 +1,22 @@
+{
+  "name": "@jimp-native/utils-ts",
+  "version": "1.0.0",
+  "description": "Various utility functions in TypeScript for the jimp-native project",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "module": "es/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf ./dist ./es ./build",
+    "build": "npm run clean && npm run build:node && npm run build:module",
+    "build:watch": "npm run build:node:debug -- -- --watch --verbose",
+    "build:debug": "npm run build:node:debug",
+    "build:module": "cross-env BABEL_ENV=module babel src -d es --extensions \".ts\" --source-maps --config-file ../../babel.config.js",
+    "build:node": "babel src -d dist --source-maps --extensions \".ts\" --config-file ../../babel.config.js"
+  },
+  "author": "Sjoerd Dal",
+  "license": "MIT",
+  "dependencies": {
+    "jimp": "^0.22.4"
+  }
+}
