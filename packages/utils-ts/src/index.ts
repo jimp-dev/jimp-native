@@ -4,9 +4,9 @@ import { cppCallbackWrapper, cppPromiseHandler } from "./cppCallbackWrapper";
 import { AsyncPlugin } from "./types/AsyncPlugin";
 
 export {
-    ensureInteger,
-    getAddonReleaseVersion,
-    cppCallbackWrapper,
-    cppPromiseHandler,
-    AsyncPlugin
+  ensureInteger,
+  getAddonReleaseVersion,
+  cppCallbackWrapper,
+  cppPromiseHandler,
+  AsyncPlugin,
 };

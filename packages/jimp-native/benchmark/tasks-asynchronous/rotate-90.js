@@ -1,5 +1,5 @@
 module.exports = async (image) => {
-    return new Promise ((resolve) => {
-        image.rotate(90, resolve);
-    });
+  return new Promise((resolve) => {
+    image.rotate(90, resolve);
+  });
 };
