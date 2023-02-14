@@ -1,4 +1,4 @@
-const constants = require("../lib/constants");
+const constants = require("@jimp/core/dist/constants");
 const path = require("path");
 
 module.exports = {

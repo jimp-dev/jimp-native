@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-blit-napi",
-  "version": "1.0.0",
+  "version": "0.0.8",
   "description": "C++ implementation of plugin-blit using the Node Addon API",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -18,10 +18,10 @@
     "build:node": "babel src -d dist --source-maps --extensions \".ts\" --config-file ../../babel.config.js"
   },
   "dependencies": {
-    "@jimp-native/plugin-blit-cpp": "*",
-    "@jimp-native/utils-cpp": "^1.0.0",
-    "@jimp-native/utils-napi": "*",
-    "@jimp-native/utils-ts": "*",
+    "@jimp-native/plugin-blit-cpp": "^0.0.8",
+    "@jimp-native/utils-cpp": "^0.0.8",
+    "@jimp-native/utils-napi": "^0.0.8",
+    "@jimp-native/utils-ts": "^0.0.8",
     "@jimp/utils": "^0.22.4",
     "jimp": "^0.22.4"
   },

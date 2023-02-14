@@ -1,6 +1,6 @@
 {
-  "name": "native-core",
-  "version": "1.0.0",
+  "name": "@jimp-native/core-cpp",
+  "version": "0.0.8",
   "description": "Core Jimp methods with C++ optimisations",
   "main": "dist/index.js",
   "scripts": {

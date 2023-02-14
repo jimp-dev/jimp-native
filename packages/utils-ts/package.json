@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/utils-ts",
-  "version": "1.0.0",
+  "version": "0.0.8",
   "description": "Various utility functions in TypeScript for the jimp-native project",
   "main": "dist/index.js",
   "types": "src/index.ts",
