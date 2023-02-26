@@ -142,7 +142,7 @@ module.exports = {
             [4 / 256, 16 / 256, 24 / 256, 16 / 256, 4 / 256],
             [1 / 256, 4 / 256, 6 / 256, 4 / 256, 1 / 256],
           ],
-          testConstants.JimpConstants.EDGE_EXTEND
+          testConstants.EDGE_EXTEND
         );
         await imageStore.store(storageKey, image);
       },
@@ -160,7 +160,7 @@ module.exports = {
             [4 / 256, 16 / 256, 24 / 256, 16 / 256, 4 / 256],
             [1 / 256, 4 / 256, 6 / 256, 4 / 256, 1 / 256],
           ],
-          testConstants.JimpConstants.EDGE_WRAP
+          testConstants.EDGE_WRAP
         );
         await imageStore.store(storageKey, image);
       },
@@ -178,7 +178,7 @@ module.exports = {
             [4 / 256, 16 / 256, 24 / 256, 16 / 256, 4 / 256],
             [1 / 256, 4 / 256, 6 / 256, 4 / 256, 1 / 256],
           ],
-          testConstants.JimpConstants.EDGE_CROP
+          testConstants.EDGE_CROP
         );
         await imageStore.store(storageKey, image);
       },

@@ -1,5 +1,6 @@
 import { ImageCallback } from "@jimp/core";
 import Jimp from "jimp";
+import { PromisifiedFunction } from "./types/AsyncPlugin";
 
 const bitmapDenyProxy = new Proxy(
   {},
@@ -33,14 +34,14 @@ export const cppCallbackWrapper = (
 
   jimpImage.bitmap.data = bitmapDenyProxy as unknown as Buffer;
 
-  return (...args) => {
+  return (error) => {
     jimpImage.bitmap.data = originalBitmap;
 
-    if (typeof args[0] === "string") {
-      args[0] = new Error(args[0]);
+    if (typeof error === "string") {
+      error = new Error(error);
     }
 
-    userCallback.bind(jimpImage).call(...args);
+    userCallback.bind(jimpImage).call(error, jimpImage);
   };
 };
 
@@ -63,3 +64,20 @@ export const cppPromiseHandler = (
 
     resolve(value);
   });
+
+/**
+ * Turns a callback-based image operation into an async one.
+ *
+ * @param callbackImplementation
+ * @returns promisified implementation
+ */
+export const wrapAsync = <
+  ImplementationT extends (...args: unknown[]) => unknown
+>(
+  callbackImplementation: ImplementationT
+) =>
+  function (...args) {
+    return new Promise((resolve, reject) => {
+      callbackImplementation(...args, cppPromiseHandler(this, resolve, reject));
+    });
+  } as PromisifiedFunction<ImplementationT>;

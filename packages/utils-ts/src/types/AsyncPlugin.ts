@@ -1,6 +1,6 @@
 import { ImageCallback } from "@jimp/core";
 
-type PromisifiedFunction<T> = T extends (
+export type PromisifiedFunction<T> = T extends (
   this: infer This,
   ...args: [...infer Args, infer Callback]
 ) => unknown

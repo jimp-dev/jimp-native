@@ -5,8 +5,8 @@ import {
   ensureInteger,
   getAddonReleaseVersion,
   cppCallbackWrapper,
-  cppPromiseHandler,
   AsyncPlugin,
+  wrapAsync,
 } from "@jimp-native/utils-ts";
 import Jimp from "jimp";
 
@@ -16,11 +16,11 @@ const blit = function (
   sourceImage: Jimp,
   xOffset: number,
   yOffset: number,
-  sourceX?: number | ImageCallback<Blit>,
+  sourceX?: number | ImageCallback<AsyncPlugin<Blit>>,
   sourceY?: number,
   sourceW?: number,
   sourceH?: number,
-  cb?: ImageCallback<Blit>
+  cb?: ImageCallback<AsyncPlugin<Blit>>
 ) {
   if (!(sourceImage instanceof this.constructor)) {
     return throwError.call(this, "sourceImage must be a Jimp image");
@@ -52,36 +52,16 @@ const blit = function (
       ensureInteger(sourceH),
       cppCallbackWrapper(this, cb)
     );
+
+    return this;
   } catch (err) {
     return throwError.call(this, err, cb);
   }
-
-  return this;
 };
 
 const plugin: () => AsyncPlugin<Blit> = () => ({
   blit,
-  blitAsync: (
-    sourceImage: Jimp,
-    xOffset: number,
-    yOffset: number,
-    sourceX?: number,
-    sourceY?: number,
-    sourceW?: number,
-    sourceH?: number
-  ) =>
-    new Promise((resolve, reject) => {
-      blit(
-        sourceImage,
-        xOffset,
-        yOffset,
-        sourceX,
-        sourceY,
-        sourceW,
-        sourceH,
-        cppPromiseHandler(this, resolve, reject)
-      );
-    }),
+  blitAsync: wrapAsync(blit),
 });
 
 export default plugin;

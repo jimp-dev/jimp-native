@@ -2,8 +2,9 @@ import { mergeDeep } from "timm";
 import { jimpEvChange } from "@jimp/core";
 
 import blit from "@jimp-native/plugin-blit-napi";
+import color from "@jimp-native/plugin-color-napi";
 
-const plugins = [blit];
+const plugins = [blit, color];
 
 export default (evChange) =>
   plugins

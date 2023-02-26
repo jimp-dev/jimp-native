@@ -1,5 +1,5 @@
 #pragma once
-#include "./colour.hpp"
+#include "colourUtil.hpp"
 #include <napi.h>
 #include <optional>
 #include <limits.h>

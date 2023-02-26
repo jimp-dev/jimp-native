@@ -6,9 +6,9 @@ const tests = [];
 // Load all tests.
 for (const testFile of fs.readdirSync(path.join(__dirname))) {
   if (
-    testFile === "blit.js" &&
     testFile.endsWith(".js") &&
-    testFile !== path.basename(__filename)
+    testFile !== path.basename(__filename) &&
+    !testFile.includes("disabled")
   ) {
     const test = require(path.join(__dirname, testFile));
     if (!test.name) {
