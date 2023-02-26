@@ -1,6 +1,7 @@
 #include "wrapBlur.hpp"
-#include "../modules/blur.hpp"
-#include "../util/doAsync.hpp"
+#include "blur.hpp"
+#include "doAsync.hpp"
+#include "nodeImage.hpp"
 
 void wrapBlur(const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
@@ -34,7 +35,7 @@ void wrapBlur(const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory
     size_t imageX = info[1].As<Napi::Number>().Int32Value();
     size_t imageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image image = Image::fromJSBuffer(imageBuffer, env, imageX, imageY);
+    Image image = NodeImage::fromJSBuffer(imageBuffer, env, imageX, imageY);
 
     int radius = info[3].As<Napi::Number>().Int32Value();
 
