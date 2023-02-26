@@ -11,4 +11,4 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     return exports;
 }
 
-NODE_API_MODULE(PluginBlitNapi, Init)
+NODE_API_MODULE(PluginBlurNapi, Init)

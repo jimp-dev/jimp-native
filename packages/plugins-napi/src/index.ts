@@ -3,9 +3,10 @@ import { jimpEvChange } from "@jimp/core";
 
 import blit from "@jimp-native/plugin-blit-napi";
 import blur from "@jimp-native/plugin-blur-napi";
+import circle from "@jimp-native/plugin-circle-napi";
 import color from "@jimp-native/plugin-color-napi";
 
-const plugins = [blit, blur, color];
+const plugins = [blit, blur, circle, color];
 
 export default (evChange) =>
   plugins

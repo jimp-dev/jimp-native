@@ -1,5 +1,5 @@
 #pragma once
 #include <napi.h>
-#include "../util/referenceFactory.hpp"
+#include "referenceFactory.hpp"
 
 void wrapCircle (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory);

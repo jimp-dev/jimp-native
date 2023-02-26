@@ -1,6 +1,7 @@
-#include "wrapCirlce.hpp"
-#include "../modules/circle.hpp"
-#include "../util/doAsync.hpp"
+#include "wrapCircle.hpp"
+#include "circle.hpp"
+#include "doAsync.hpp"
+#include "nodeImage.hpp"
 
 void wrapCircle(const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
@@ -43,7 +44,7 @@ void wrapCircle(const Napi::CallbackInfo& info, ReferenceFactory& referenceFacto
     size_t imageX = info[1].As<Napi::Number>().Int32Value();
     size_t imageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image image = Image::fromJSBuffer(imageBuffer, env, imageX, imageY);
+    Image image = NodeImage::fromJSBuffer(imageBuffer, env, imageX, imageY);
 
     long radius = info[3].As<Napi::Number>().Int32Value();
     long centreX = info[4].As<Napi::Number>().Int32Value();
