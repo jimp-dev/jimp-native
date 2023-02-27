@@ -1,3 +1,4 @@
+const Jimp = require("jimp");
 const constants = require("@jimp/core/dist/constants");
 const path = require("path");
 
@@ -14,6 +15,10 @@ module.exports = {
 
   // Output storage folder, for visual inspection purposes.
   VISUAL_OUT_DIR: path.join(__dirname, "visual-output"),
+
+  BLEND_MODE_MAP: Object.getOwnPropertyNames(Jimp)
+    .filter((k) => k.startsWith("BLEND_"))
+    .reduce((result, k, idx) => ({ ...result, [Jimp[k]]: idx }), {}),
 
   /*
     Amount of difference allowed between two colour components (0 - 255). This is to account for small arithmetic 

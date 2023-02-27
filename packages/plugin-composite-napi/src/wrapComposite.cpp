@@ -1,7 +1,7 @@
 #include "wrapComposite.hpp"
-#include "../modules/composite.hpp"
-#include "../util/image.hpp"
-#include "../util/doAsync.hpp"
+#include "composite.hpp"
+#include "nodeImage.hpp"
+#include "doAsync.hpp"
 
 void wrapComposite (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
@@ -59,13 +59,13 @@ void wrapComposite (const Napi::CallbackInfo& info, ReferenceFactory& referenceF
     size_t sourceImageX = info[1].As<Napi::Number>().Int32Value();
     size_t sourceImageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image sourceImage = Image::fromJSBuffer(sourceImageBuffer, env, sourceImageX, sourceImageY);
+    Image sourceImage = NodeImage::fromJSBuffer(sourceImageBuffer, env, sourceImageX, sourceImageY);
     
     Napi::Buffer<uint8_t> destImageBuffer = info[3].As<Napi::Buffer<uint8_t>>();
     size_t destImageX = info[4].As<Napi::Number>().Int32Value();
     size_t destImageY = info[5].As<Napi::Number>().Int32Value();
     
-    Image destImage = Image::fromJSBuffer(destImageBuffer, env, destImageX, destImageY);
+    Image destImage = NodeImage::fromJSBuffer(destImageBuffer, env, destImageX, destImageY);
     
     long x = info[6].As<Napi::Number>().Int32Value();
     long y = info[7].As<Napi::Number>().Int32Value();

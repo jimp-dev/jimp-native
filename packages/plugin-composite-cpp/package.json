@@ -1,7 +1,7 @@
 {
-  "name": "@jimp-native/core-cpp",
+  "name": "@jimp-native/plugin-composite-cpp",
   "version": "0.0.8",
-  "description": "Core Jimp methods with C++ optimisations",
+  "description": "Platform agnostic C++ implementation of the core jimp composite method",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
