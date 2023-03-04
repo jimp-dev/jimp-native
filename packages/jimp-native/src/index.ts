@@ -5,5 +5,10 @@ import plugins from "@jimp-native/plugins-napi";
 
 export default configure({
   types: [types],
-  plugins: [plugins],
+  plugins: [
+    plugins,
+    () => ({
+      __native: true,
+    }),
+  ],
 });

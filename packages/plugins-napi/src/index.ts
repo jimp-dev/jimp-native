@@ -6,8 +6,9 @@ import blur from "@jimp-native/plugin-blur-napi";
 import circle from "@jimp-native/plugin-circle-napi";
 import color from "@jimp-native/plugin-color-napi";
 import composite from "@jimp-native/plugin-composite-napi";
+import crop from "@jimp-native/plugin-crop-napi";
 
-const plugins = [blit, blur, circle, color, composite];
+const plugins = [blit, blur, circle, color, composite, crop];
 
 export default (evChange) =>
   plugins

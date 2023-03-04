@@ -9,7 +9,7 @@
 typedef void (*WrapperFunction) (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory);
 
 /**
- * Wraps a wrapper function in a generic error handler that bubbles JS errors thrown by C++ up to JavaScript land.
+ * Wraps our glue code in a generic error handler that bubbles JS errors thrown by C++ up to JavaScript land.
  * Returns a callable that can be passed to Napi::Function::New.
  */
 auto wrapErrorHandler(WrapperFunction fn, ReferenceFactory& referenceFactory) {

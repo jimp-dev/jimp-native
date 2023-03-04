@@ -1,6 +1,7 @@
 #include "wrapCrop.hpp"
-#include "../modules/crop.hpp"
-#include "../util/doAsync.hpp"
+#include "crop.hpp"
+#include "doAsync.hpp"
+#include "nodeImage.hpp"
 
 void wrapCrop(const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
@@ -46,7 +47,7 @@ void wrapCrop(const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory
     size_t imageX = info[1].As<Napi::Number>().Int32Value();
     size_t imageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image image = Image::fromJSBuffer(imageBuffer, env, imageX, imageY);
+    Image image = NodeImage::fromJSBuffer(imageBuffer, env, imageX, imageY);
 
     long xOffset = info[3].As<Napi::Number>().Int32Value();
     long yOffset = info[4].As<Napi::Number>().Int32Value();
@@ -136,7 +137,7 @@ void wrapAutocrop(const Napi::CallbackInfo& info, ReferenceFactory& referenceFac
     size_t imageX = info[1].As<Napi::Number>().Int32Value();
     size_t imageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image image = Image::fromJSBuffer(imageBuffer, env, imageX, imageY);
+    Image image = NodeImage::fromJSBuffer(imageBuffer, env, imageX, imageY);
 
     long leaveBorder = info[3].As<Napi::Number>().Int32Value();
     double tolerance = info[4].As<Napi::Number>().DoubleValue();

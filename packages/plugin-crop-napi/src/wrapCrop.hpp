@@ -1,6 +1,6 @@
 #pragma once
 #include <napi.h>
-#include "../util/referenceFactory.hpp"
+#include "referenceFactory.hpp"
 
 void wrapCrop (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory);
 
