@@ -1,6 +1,7 @@
 #include "wrapMask.hpp"
-#include "../modules/mask.hpp"
-#include "../util/doAsync.hpp"
+#include "mask.hpp"
+#include "doAsync.hpp"
+#include "nodeImage.hpp"
 
 void wrapMask (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
@@ -50,13 +51,13 @@ void wrapMask (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactor
     size_t sourceImageX = info[1].As<Napi::Number>().Int32Value();
     size_t sourceImageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image sourceImage = Image::fromJSBuffer(sourceImageBuffer, env, sourceImageX, sourceImageY);
+    Image sourceImage = NodeImage::fromJSBuffer(sourceImageBuffer, env, sourceImageX, sourceImageY);
     
     Napi::Buffer<uint8_t> destImageBuffer = info[3].As<Napi::Buffer<uint8_t>>();
     size_t destImageX = info[4].As<Napi::Number>().Int32Value();
     size_t destImageY = info[5].As<Napi::Number>().Int32Value();
     
-    Image destImage = Image::fromJSBuffer(destImageBuffer, env, destImageX, destImageY);
+    Image destImage = NodeImage::fromJSBuffer(destImageBuffer, env, destImageX, destImageY);
     
     long xOffset = info[6].As<Napi::Number>().Int32Value();
     long yOffset = info[7].As<Napi::Number>().Int32Value();

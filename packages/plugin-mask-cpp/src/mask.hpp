@@ -2,7 +2,7 @@
 #include "image.hpp"
 
 /**
- * Applies a mask (the source image) to the target image. A black pixel in the mask is a transperant pixel on the
+ * Applies a mask (the source image) to the target image. A black pixel in the mask is a transparent pixel on the
  * target image.
  * 
  * \param sourceImage

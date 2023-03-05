@@ -10,6 +10,7 @@ import crop from "@jimp-native/plugin-crop-napi";
 import dither from "@jimp-native/plugin-dither-napi";
 import flip from "@jimp-native/plugin-flip-napi";
 import invert from "@jimp-native/plugin-invert-napi";
+import mask from "@jimp-native/plugin-mask-napi";
 
 const plugins = [
   blit,
@@ -21,6 +22,7 @@ const plugins = [
   dither,
   flip,
   invert,
+  mask,
 ];
 
 export default (evChange) =>
