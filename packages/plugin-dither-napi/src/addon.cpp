@@ -11,4 +11,4 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     return exports;
 }
 
-NODE_API_MODULE(PluginCompositeNapi, Init)
+NODE_API_MODULE(PluginDitherNapi, Init)
