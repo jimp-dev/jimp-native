@@ -1,6 +1,6 @@
-#include "wrapInvert.hpp"
-#include "../modules/invert.hpp"
-#include "../util/doAsync.hpp"
+#include "./wrapInvert.hpp"
+#include "invert.hpp"
+#include "doAsync.hpp"
 
 void wrapInvert (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();

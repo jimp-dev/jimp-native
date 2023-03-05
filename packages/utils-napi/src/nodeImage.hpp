@@ -1,5 +1,5 @@
 #pragma once
-#include "../node_modules/@jimp-native/utils-cpp/src/image.hpp"
+#include "image.hpp"
 #include <napi.h>
 #include <optional>
 #include <stdint.h>

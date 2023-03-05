@@ -9,8 +9,19 @@ import composite from "@jimp-native/plugin-composite-napi";
 import crop from "@jimp-native/plugin-crop-napi";
 import dither from "@jimp-native/plugin-dither-napi";
 import flip from "@jimp-native/plugin-flip-napi";
+import invert from "@jimp-native/plugin-invert-napi";
 
-const plugins = [blit, blur, circle, color, composite, crop, dither, flip];
+const plugins = [
+  blit,
+  blur,
+  circle,
+  color,
+  composite,
+  crop,
+  dither,
+  flip,
+  invert,
+];
 
 export default (evChange) =>
   plugins
