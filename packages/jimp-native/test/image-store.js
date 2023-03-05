@@ -14,7 +14,7 @@ class ImageStore {
 
     for (const entry of fs.readdirSync(visualPath)) {
       if (entry !== ".gitkeep") {
-        fs.rmdirSync(path.join(visualPath, entry), { recursive: true });
+        fs.rmSync(path.join(visualPath, entry), { recursive: true });
       }
     }
   }

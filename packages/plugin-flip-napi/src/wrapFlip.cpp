@@ -1,6 +1,7 @@
 #include "wrapFlip.hpp"
-#include "../modules/flip.hpp"
-#include "../util/doAsync.hpp"
+#include "flip.hpp"
+#include "doAsync.hpp"
+#include "nodeImage.hpp"
 
 void wrapFlip (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
@@ -38,7 +39,7 @@ void wrapFlip (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactor
     size_t imageX = info[1].As<Napi::Number>().Int32Value();
     size_t imageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image image = Image::fromJSBuffer(imageBuffer, env, imageX, imageY);
+    Image image = NodeImage::fromJSBuffer(imageBuffer, env, imageX, imageY);
 
     bool horizontally = info[3].As<Napi::Boolean>();
     bool vertically = info[4].As<Napi::Boolean>();

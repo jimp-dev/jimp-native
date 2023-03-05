@@ -28,7 +28,7 @@ function cleanExit(exitCode = 0) {
     process.exit(exitCode);
   } else {
     alreadyClean = true;
-    fs.rmdirSync(tmpDir, { recursive: true });
+    fs.rmSync(tmpDir, { recursive: true });
     process.exit(exitCode);
   }
 }
