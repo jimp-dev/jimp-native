@@ -1,5 +1,5 @@
 #pragma once
 #include <napi.h>
-#include "../util/referenceFactory.hpp"
+#include "referenceFactory.hpp"
 
 void wrapDither (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory);

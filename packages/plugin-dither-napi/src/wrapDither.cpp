@@ -1,6 +1,7 @@
 #include "wrapDither.hpp"
-#include "../modules/dither.hpp"
-#include "../util/doAsync.hpp"
+#include "dither.hpp"
+#include "doAsync.hpp"
+#include "nodeImage.hpp"
 
 void wrapDither (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
@@ -30,7 +31,7 @@ void wrapDither (const Napi::CallbackInfo& info, ReferenceFactory& referenceFact
     size_t imageX = info[1].As<Napi::Number>().Int32Value();
     size_t imageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image image = Image::fromJSBuffer(imageBuffer, env, imageX, imageY);
+    Image image = NodeImage::fromJSBuffer(imageBuffer, env, imageX, imageY);
 
     if (callback) {
         auto imageBufferReference = referenceFactory.ref(env, imageBuffer);

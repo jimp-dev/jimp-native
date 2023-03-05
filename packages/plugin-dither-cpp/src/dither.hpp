@@ -1,6 +1,8 @@
 #pragma once
 #include "image.hpp"
 
+const uint8_t rgb565Matrix[] = {1, 9, 3, 11, 13, 5, 15, 7, 4, 12, 2, 10, 16, 8, 14, 6};
+
 /**
  * Applies a dithering effect to the given image.
  * 
