@@ -7,7 +7,7 @@ typedef double (*InterpolationMethod) (double v0, double v1, double v2, double v
  * The following interpolation methods are ported over from the resize2.js file in the JIMP codebase:
  * https://raw.githubusercontent.com/oliver-moran/jimp/v0.16.1/packages/plugin-resize/src/modules/resize2.js
  *
- * C++ port (c) 2021 Sjoerd Dal
+ * C++ port (c) 2021 Sjoerd Dal (MIT)
  *
  * The original code is available here: https://raw.githubusercontent.com/guyonroche/imagejs/master/lib/resize.js under
  * the following license:

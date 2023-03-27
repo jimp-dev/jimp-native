@@ -1,6 +1,7 @@
 #pragma once
 #include "image.hpp"
 #include "./imageJsPort.hpp"
+#include "./jsImageResizerPort.hpp"
 #include <cmath>
 
 enum ResizeMethod {
@@ -8,7 +9,8 @@ enum ResizeMethod {
     BILINEAR = 1,
     BICUBIC = 2,
     HERMITE = 3,
-    BEZIER = 4
+    BEZIER = 4,
+    JIMP_2PASS = 5,
 };
 
 void nearestNeighbour(Image& src, Image& dst) {
@@ -45,14 +47,14 @@ void bilinear(Image& src, Image& dst) {
         long srcPosY = y / yScaleFactor;
 
         // Get the distance away from the closest pixel in the source image both in X and Y direction.
-        double distanceY = (y - std::floor(srcPosY * yScaleFactor)) / yScaleFactor;
+        double distanceY = (y - std::floor((double) srcPosY * yScaleFactor)) / yScaleFactor;
 
         for (long x = 0; dst.width > x; x++) {
             long srcPosX = x / xScaleFactor;
-            double distanceX = (x - std::floor(srcPosX * xScaleFactor)) / xScaleFactor;
+            double distanceX = (x - std::floor((double) srcPosX * xScaleFactor)) / xScaleFactor;
 
             // Sample the closest source pixel, the pixel to the east, the pixel to the south and the pixel south-east.
-            uint8_t* sample00 = src.getPixelAt(srcPosX, srcPosY);
+            uint8_t* sample00 = src.getPixelAt(srcPosX, srcPosY, EDGE_EXTEND);
             uint8_t* sample10 = src.getPixelAt(srcPosX + 1, srcPosY, EDGE_CROP, sample00);
             uint8_t* sample01 = src.getPixelAt(srcPosX, srcPosY + 1, EDGE_CROP, sample00);
             uint8_t* sample11 = src.getPixelAt(srcPosX + 1, srcPosY + 1, EDGE_EXTEND);
@@ -70,10 +72,10 @@ void bilinear(Image& src, Image& dst) {
             double aY1 = (sample11[3] - sample01[3]) * distanceX + sample01[3];
 
             // Interpolate between north and south interpolations based on Y distance.
-            targetPixels[offset++] = (rY1 - rY0) * distanceY + rY0;
-            targetPixels[offset++] = (gY1 - gY0) * distanceY + gY0;
-            targetPixels[offset++] = (bY1 - bY0) * distanceY + bY0;
-            targetPixels[offset++] = (aY1 - aY0) * distanceY + aY0;
+            targetPixels[offset++] = std::min(255.0, std::max(0.0, (rY1 - rY0) * distanceY + rY0));
+            targetPixels[offset++] = std::min(255.0, std::max(0.0, (gY1 - gY0) * distanceY + gY0));
+            targetPixels[offset++] = std::min(255.0, std::max(0.0, (bY1 - bY0) * distanceY + bY0));
+            targetPixels[offset++] = std::min(255.0, std::max(0.0, (aY1 - aY0) * distanceY + aY0));
         }
     }
 }
@@ -99,9 +101,11 @@ void resize(Image& src, Image& dst, ResizeMethod method) {
         case ResizeMethod::BEZIER:
             complexInterpolation(src, dst, bezier);
             break;
-        default:
         case ResizeMethod::BILINEAR:
             bilinear(src, dst);
+            break;
+        default:
+            defaultResize(src, dst);
             break;
     }
 }
