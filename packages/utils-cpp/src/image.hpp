@@ -1,6 +1,5 @@
 #pragma once
 #include "colourUtil.hpp"
-#include <napi.h>
 #include <optional>
 #include <limits.h>
 #include <cmath>
@@ -251,19 +250,6 @@ public:
      **/
     void clear() {
         std::fill_n(imageData, pixelCount * 4, 0);
-    }
-
-    /**
-     * Iterates over every pixel in the image, calling the provided function with x, y and pixel data.
-     **/
-    void iterate(const std::function <void(long x, long y, uint8_t* pixel)>& callback) {
-        long pixelOffset = 0;
-        for (long y = 0; height > y; y++) {
-            for (long x = 0; width > x; x++) {
-                callback(x, y, imageData + pixelOffset);
-                pixelOffset += 4;
-            }
-        }
     }
 
     /**

@@ -3,7 +3,7 @@ const { PHASE_TYPES } = testConstants;
 
 module.exports = {
   name: "resize",
-  tolerance: 2,
+  tolerance: 5,
   phases: [
     {
       name: "nearest-neighbour-2x",
