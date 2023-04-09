@@ -61,13 +61,12 @@ void wrapCrop(const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory
             env,
             callback.value(),
             [image = std::move(image), xOffset, yOffset, width, height]() mutable {
-            crop(image, xOffset, yOffset, width, height);
-        },
+                crop(image, xOffset, yOffset, width, height);
+            },
             [bufferReference](Napi::Env env, Napi::Function callback, auto err) mutable {
-            bufferReference.unref();
-            callback.Call({ err ? Napi::String::New(env, err.value()) : env.Null() });
-        }
-        );
+                bufferReference.unref();
+                callback.Call({ err ? Napi::String::New(env, err.value()) : env.Null() });
+            });
     } else {
         crop(image, xOffset, yOffset, width, height);
     }
@@ -152,7 +151,7 @@ void wrapAutocrop(const Napi::CallbackInfo& info, ReferenceFactory& referenceFac
 
     if (callback) {
         auto imageBufferReference = referenceFactory.ref(env, imageBuffer);
-        
+
         long* newWidth = new long;
         long* newHeight = new long;
 
@@ -172,33 +171,33 @@ void wrapAutocrop(const Napi::CallbackInfo& info, ReferenceFactory& referenceFac
                 newWidth,
                 newHeight
             ]() mutable {
-                autocrop(
-                    image,
-                    leaveBorder,
-                    tolerance,
-                    cropOnlyFrames,
-                    symmetric,
-                    north,
-                    east,
-                    south,
-                    west,
-                    *newWidth,
-                    *newHeight
-                );
-            },
+            autocrop(
+                image,
+                leaveBorder,
+                tolerance,
+                cropOnlyFrames,
+                symmetric,
+                north,
+                east,
+                south,
+                west,
+                *newWidth,
+                *newHeight
+            );
+        },
             [
                 imageBufferReference,
                 bitmap = std::move(bitmap),
                 newWidth,
                 newHeight
             ](Napi::Env env, Napi::Function callback, auto err) mutable {
-                auto jsNewWidth = Napi::Number::New(env, *newWidth);
-                auto jsNewHeight = Napi::Number::New(env, *newHeight);
-                delete newWidth;
-                delete newHeight;
-                imageBufferReference.unref();
-                callback.Call({ err ? Napi::String::New(env, err.value()) : env.Null(), jsNewWidth, jsNewHeight });
-            }
+            auto jsNewWidth = Napi::Number::New(env, *newWidth);
+            auto jsNewHeight = Napi::Number::New(env, *newHeight);
+            delete newWidth;
+            delete newHeight;
+            imageBufferReference.unref();
+            callback.Call({ err ? Napi::String::New(env, err.value()) : env.Null(), jsNewWidth, jsNewHeight });
+        }
         );
     } else {
         long newWidth = image.width;
