@@ -41,7 +41,7 @@ export const cppCallbackWrapper = (
       error = new Error(error);
     }
 
-    userCallback.bind(jimpImage).call(error, jimpImage);
+    userCallback.bind(jimpImage).call(jimpImage, error, jimpImage);
   };
 };
 

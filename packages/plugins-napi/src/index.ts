@@ -12,6 +12,7 @@ import flip from "@jimp-native/plugin-flip-napi";
 import invert from "@jimp-native/plugin-invert-napi";
 import mask from "@jimp-native/plugin-mask-napi";
 import resize from "@jimp-native/plugin-resize-napi";
+import rotate from "@jimp-native/plugin-rotate-napi";
 
 const plugins = [
   blit,
@@ -25,6 +26,7 @@ const plugins = [
   invert,
   mask,
   resize,
+  rotate,
 ];
 
 export default (evChange) =>

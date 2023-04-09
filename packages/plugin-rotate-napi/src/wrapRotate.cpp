@@ -1,6 +1,7 @@
 #include "wrapRotate.hpp"
-#include "../modules/rotate.hpp"
-#include "../util/doAsync.hpp"
+#include "rotate.hpp"
+#include "doAsync.hpp"
+#include "nodeImage.hpp"
 
 void wrapRotate (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
@@ -34,7 +35,7 @@ void wrapRotate (const Napi::CallbackInfo& info, ReferenceFactory& referenceFact
     size_t sourceImageX = info[1].As<Napi::Number>().Int32Value();
     size_t sourceImageY = info[2].As<Napi::Number>().Int32Value();
 
-    Image sourceImage = Image::fromJSBuffer(sourceImageBuffer, env, sourceImageX, sourceImageY);
+    Image sourceImage = NodeImage::fromJSBuffer(sourceImageBuffer, env, sourceImageX, sourceImageY);
     
     double degrees = info[3].As<Napi::Number>().DoubleValue();
 
