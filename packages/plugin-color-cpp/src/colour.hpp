@@ -160,7 +160,19 @@ void sepia(uint8_t* pixelData, size_t rgbaArrayLength) {
  * \param edgeHandling
  * \param size Mainly used for the pixelate effect. Causes multiple samples from the source image to land on the same pixel, thus causing a pixelation effect.
  */
-void convolution(Image& source, Image& target, double** kernel, long kernelWidth, long kernelHeight, long xOffset, long yOffset, long width, long height, EdgeHandling edgeHandling, double size) {
+void convolution(
+    Image& source,
+    Image& target,
+    std::vector<std::vector<double>> kernel,
+    long kernelWidth,
+    long kernelHeight,
+    long xOffset,
+    long yOffset,
+    long width,
+    long height,
+    EdgeHandling edgeHandling,
+    double size
+) {
     long kxOffset = -(kernelWidth / 2);
     long kyOffset = -(kernelWidth / 2);
 

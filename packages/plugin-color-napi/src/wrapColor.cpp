@@ -406,51 +406,44 @@ void wrapConvolution(const Napi::CallbackInfo& info, ReferenceFactory& reference
         throw Napi::Error::New(env, "Kernel has to be at least 1 high");
     }
 
-    unsigned int kernelRowsAllocated = 0;
-    double** kernel = new double* [kernelHeight];
-    auto deleteKernel = [kernelRowsAllocated, kernel]() {
-        for (unsigned int i = 0; kernelRowsAllocated > i; i++) {
-            delete[] kernel[i];
-        }
-
-        delete[] kernel;
-    };
+    std::vector<std::vector<double>> kernel;
+    kernel.reserve(kernelHeight);
 
     unsigned int kernelWidth = 1;
     for (unsigned int y = 0; kernelHeight > y; y++) {
+        std::vector<double> kernelRow;
+
         Napi::Value rowVal = jsKernel.Get(y);
 
         if (!rowVal.IsArray()) {
-            deleteKernel();
             throw Napi::Error::New(env, "Kernel must be a 2D array of numbers");
         }
 
-        Napi::Array row = rowVal.As<Napi::Array>();
+        Napi::Array jsRow = rowVal.As<Napi::Array>();
 
         if (y == 0) {
-            kernelWidth = row.Length();
+            kernelWidth = jsRow.Length();
             if (kernelWidth == 0) {
-                deleteKernel();
                 throw Napi::Error::New(env, "Kernel width must be at least 1");
             }
         } else {
-            if (row.Length() != kernelWidth) {
-                deleteKernel();
+            if (jsRow.Length() != kernelWidth) {
                 throw Napi::Error::New(env, "Kernel rows must be of equal size");
             }
         }
 
-        kernel[y] = new double[kernelWidth];
-        kernelRowsAllocated++;
+        kernelRow.reserve(kernelWidth);
+
         for (unsigned int x = 0; kernelWidth > x; x++) {
-            Napi::Value elementVal = row.Get(x);
+            Napi::Value elementVal = jsRow.Get(x);
             if (!elementVal.IsNumber()) {
-                deleteKernel();
                 throw Napi::Error::New(env, "Kernel must be a 2D array of numbers");
             }
 
-            kernel[y][x] = elementVal.As<Napi::Number>().DoubleValue();
+            kernelRow.push_back(elementVal.As<Napi::Number>().DoubleValue());
         }
+
+        kernel.push_back(kernelRow);
     }
 
     EdgeHandling edgeHandling = (EdgeHandling) info[4].As<Napi::Number>().Uint32Value();
@@ -488,9 +481,8 @@ void wrapConvolution(const Napi::CallbackInfo& info, ReferenceFactory& reference
                         size
                     );
             },
-            [bufferReference, deleteKernel = std::move(deleteKernel)](Napi::Env env, Napi::Function callback, auto err) mutable {
+            [bufferReference](Napi::Env env, Napi::Function callback, auto err) mutable {
                 bufferReference.unref();
-                deleteKernel();
                 callback.Call({ err ? Napi::String::New(env, err.value()) : env.Null() });
             }
         );
@@ -508,8 +500,5 @@ void wrapConvolution(const Napi::CallbackInfo& info, ReferenceFactory& reference
             edgeHandling,
             size
         );
-
-        deleteKernel();
     }
-
 }
