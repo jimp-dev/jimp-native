@@ -51,7 +51,7 @@ public:
         rgbaArrayLength(width* height * 4),
         memoryManagedExternally(false) {
         Image::sizeSanityCheck(width, height);
-        imageData = new uint8_t[width * height * 4];
+        imageData = new uint8_t[width * height * 4]();
     }
 
     Image(const Image& img):
@@ -63,8 +63,8 @@ public:
         if (img.memoryManagedExternally) {
             imageData = img.imageData;
         } else {
-            imageData = new uint8_t[img.pixelCount * 4];
-            std::copy(imageData, imageData + img.pixelCount * 4, imageData);
+            imageData = new uint8_t[img.rgbaArrayLength];
+            std::copy(img.imageData, img.imageData + img.pixelCount * 4, imageData);
         }
     }
 
@@ -73,13 +73,9 @@ public:
         height(img.height),
         pixelCount(img.pixelCount),
         rgbaArrayLength(img.rgbaArrayLength),
-        memoryManagedExternally(img.memoryManagedExternally) {
-        if (img.memoryManagedExternally) {
-            imageData = img.imageData;
-        } else {
-            img.moved = true;
-            imageData = img.imageData;
-        }
+        memoryManagedExternally(img.memoryManagedExternally),
+        imageData(img.imageData) {
+        img.moved = true;
     }
 
     const long width;
@@ -110,7 +106,7 @@ public:
     static Image createEmpty(size_t width, size_t height) {
         Image::sizeSanityCheck(width, height);
 
-        uint8_t* imageData = new uint8_t[width * height * 4];
+        uint8_t* imageData = new uint8_t[width * height * 4]();
 
         return Image(imageData, width, height, width * height, false);
     }

@@ -33,7 +33,7 @@ public:
             throw Napi::Error::New(env, "Width and height do not match supplied buffer.");
         }
 
-        return NodeImage(array, width, height, pixelCount, buffer);
+        return NodeImage(array, width, height, pixelCount, true);
     }
 };
 
