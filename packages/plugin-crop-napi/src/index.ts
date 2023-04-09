@@ -36,14 +36,15 @@ const crop = function (
 
     const prependUpdate = typeof cb === "function";
     if (prependUpdate) {
+      const originalCallback = cb;
       // Ensures updateBitmap gets called before the image gets to user code.
       cb = function (err) {
         if (err) {
-          return cb.call(this, err, null);
+          return originalCallback.call(this, err, null);
         }
 
         updateBitmap();
-        cb.call(this, null, this);
+        originalCallback.call(this, null, this);
       };
 
       cb.bind(this);
@@ -146,14 +147,16 @@ const autocrop = function (
 
   const prependUpdate = typeof cb === "function";
   if (prependUpdate) {
+    const originalCallback = cb;
+
     // Ensures updateBitmap gets called before the image gets to user code.
     cb = function (err) {
       if (err) {
-        return cb.call(this, err, null);
+        return originalCallback.call(this, err, null);
       }
 
       updateBitmap();
-      cb.call(this, null, this);
+      originalCallback.call(this, null, this);
     };
 
     cb.bind(this);
