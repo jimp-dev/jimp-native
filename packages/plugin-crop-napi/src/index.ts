@@ -20,57 +20,63 @@ const crop = function (
   h: number,
   cb?: ImageCallback<CropPlugin>
 ) {
+  const self = this;
+
   try {
     x = Math.max(ensureInteger(x), 0);
     y = Math.max(ensureInteger(y), 0);
-    w = Math.min(ensureInteger(w), this.getWidth());
-    h = Math.min(ensureInteger(h), this.getHeight());
+    w = Math.min(ensureInteger(w), self.getWidth());
+    h = Math.min(ensureInteger(h), self.getHeight());
 
     const updateBitmap = () => {
-      this.bitmap.data = this.bitmap.data.slice(0, w * h * 4);
-      this.bitmap.width = w;
-      this.bitmap.height = h;
+      self.bitmap.data = self.bitmap.data.slice(0, w * h * 4);
+      self.bitmap.width = w;
+      self.bitmap.height = h;
     };
 
-    const skip = x === 0 && y === 0 && w === this.getWidth();
+    const skip = x === 0 && y === 0 && w === self.getWidth();
+
+    if (skip) {
+      // If X and Y is zero and w is the full image width then we can just cut the buffer to size.
+      updateBitmap();
+
+      if (typeof cb === "function") {
+        cb.call(self, null, self);
+      }
+
+      return self;
+    }
 
     const prependUpdate = typeof cb === "function";
     if (prependUpdate) {
       const originalCallback = cb;
       // Ensures updateBitmap gets called before the image gets to user code.
-      cb = function (err) {
+      cb = (err) => {
         if (err) {
-          return originalCallback.call(this, err, null);
+          return throwError.call(self, err, cb);
         }
 
         updateBitmap();
-        originalCallback.call(this, null, this);
+        originalCallback.call(self, null, self);
       };
-
-      cb.bind(this);
     }
 
-    // If X and Y is zero and w is the full image width then we can just cut the buffer to size.
-    if (skip) {
+    addon.crop(
+      self.bitmap.data,
+      self.getWidth(),
+      self.getHeight(),
+      x,
+      y,
+      w,
+      h,
+      cppCallbackWrapper(self, cb)
+    );
+
+    if (!prependUpdate) {
       updateBitmap();
-    } else {
-      addon.crop(
-        this.bitmap.data,
-        this.getWidth(),
-        this.getHeight(),
-        x,
-        y,
-        w,
-        h,
-        cppCallbackWrapper(this, cb)
-      );
-
-      if (!prependUpdate) {
-        updateBitmap();
-      }
     }
 
-    return this;
+    return self;
   } catch (err) {
     return throwError.call(this, err, cb);
   }

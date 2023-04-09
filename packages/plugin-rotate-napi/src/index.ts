@@ -108,10 +108,10 @@ function rotate(
 
       if (cb) {
         // If we're running in async mode then we'll need to chain these properly through callbacks.
-        const doCrop = function () {
+        const doCrop = () => {
           self.crop(
-            ensureInteger(this.bitmap.width / 2 - width / 2),
-            ensureInteger(this.bitmap.height / 2 - height / 2),
+            ensureInteger(self.bitmap.width / 2 - width / 2),
+            ensureInteger(self.bitmap.height / 2 - height / 2),
             width,
             height,
             (err) => {
@@ -121,9 +121,9 @@ function rotate(
 
               self.bitmap.width = width;
               self.bitmap.height = height;
-              self.bitmap.data = this.bitmap.data.slice(0, width * height * 4);
+              self.bitmap.data = self.bitmap.data.slice(0, width * height * 4);
 
-              cb.call(self, this);
+              cb.call(self, null, self);
             }
           );
         };
@@ -172,9 +172,9 @@ function rotate(
         );
 
         addon.rotate(
-          this.bitmap.data,
-          this.bitmap.width,
-          this.bitmap.height,
+          self.bitmap.data,
+          self.bitmap.width,
+          self.bitmap.height,
           degrees
         );
 
@@ -185,9 +185,9 @@ function rotate(
           height
         );
 
-        this.bitmap.width = width;
-        this.bitmap.height = height;
-        this.bitmap.data = this.bitmap.data.slice(0, width * height * 4);
+        self.bitmap.width = width;
+        self.bitmap.height = height;
+        self.bitmap.data = self.bitmap.data.slice(0, width * height * 4);
       }
     } else {
       addon.rotate(
