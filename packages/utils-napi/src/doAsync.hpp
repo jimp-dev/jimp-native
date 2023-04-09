@@ -43,7 +43,7 @@ void doAsync(
                 errorMessage = std::string("An exception occurred on a C++ thread within Jimp native: ").append(err.what());
             }
 
-            auto status = threadSafeJSCallback.BlockingCall(
+            threadSafeJSCallback.BlockingCall(
                 [
                     onDone = std::move(onDone),
                     errorMessage = std::move(errorMessage)
@@ -56,8 +56,6 @@ void doAsync(
                 }
             );
 
-            if (status == napi_status::napi_ok) {
-                threadSafeJSCallback.Release();
-            }
+            threadSafeJSCallback.Release();
         });
 }
