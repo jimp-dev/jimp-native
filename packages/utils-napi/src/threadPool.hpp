@@ -15,6 +15,7 @@ private:
     std::mutex threadsAvailableLock;
     std::condition_variable waitForWork;
     std::deque<std::function<void()>> work;
+    bool shutdown = false;
 
     const unsigned int minThreads = 2;
     const unsigned int maxThreads = std::max(minThreads, std::thread::hardware_concurrency());
@@ -33,8 +34,8 @@ private:
                 work.shrink_to_fit();
                 // If this is a permanent thread, then allow waiting on a job forever, otherwise spin down after a timeout.
                 if (permanent) {
-                    waitForWork.wait(uniqueWorkLock, [&] { return !work.empty(); });
-                } else if (!waitForWork.wait_for(uniqueWorkLock, std::chrono::milliseconds(threadLingerMs), [&] { return !work.empty(); })) {
+                    waitForWork.wait(uniqueWorkLock, [&] { return !work.empty() || shutdown; });
+                } else if (!waitForWork.wait_for(uniqueWorkLock, std::chrono::milliseconds(threadLingerMs), [&] { return !work.empty() || shutdown; })) {
                     uniqueWorkLock.unlock();
                     decrementThreadsAvailable();
                     decrementThreadCount();
@@ -42,19 +43,17 @@ private:
                 }
             }
 
-            fn = std::move(work.front());
-
-            if (!fn) {
-                work.front() = std::move(fn);
+            if (shutdown) {
                 uniqueWorkLock.unlock();
                 decrementThreadsAvailable();
                 decrementThreadCount();
                 break;
             }
 
+            fn = work.front();
             work.pop_front();
-            uniqueWorkLock.unlock();
 
+            uniqueWorkLock.unlock();
             decrementThreadsAvailable();
 
             try {
@@ -94,14 +93,14 @@ public:
     ~ThreadPool() {
         workLock.lock();
         work.clear();
-        work.push_back({}); // Emplace a non-callable function, causing all threads to quit.
+        shutdown = true;
         workLock.unlock();
         waitForWork.notify_all();
     }
 
     void queue(std::function<void()> job) {
         workLock.lock();
-        work.push_back(std::move(job));
+        work.push_back(job);
         workLock.unlock();
 
         waitForWork.notify_one();
