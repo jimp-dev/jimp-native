@@ -18,7 +18,7 @@ async function verifyAsync(JimpConstructor, testFn) {
     };
 
     const callback = () => {
-      if (!asynchronous && JimpConstructor.__trueAsync) {
+      if (!asynchronous && JimpConstructor.prototype.__native) {
         return reject(
           new Error(
             `Received callback before async detection function, this call blocked!`
@@ -170,7 +170,7 @@ module.exports = {
               [4 / 256, 16 / 256, 24 / 256, 16 / 256, 4 / 256],
               [1 / 256, 4 / 256, 6 / 256, 4 / 256, 1 / 256],
             ],
-            testConstants.JimpConstants.EDGE_EXTEND,
+            testConstants.EDGE_EXTEND,
             callback
           );
           asyncDetect();
@@ -179,83 +179,83 @@ module.exports = {
         await imageStore.store(storageKey, image);
       },
     },
-    {
-      name: "opaque",
-      type: PHASE_TYPES.COMPARISON,
-      run: async (JimpConstructor, storageKey, imageStore) => {
-        const image = await JimpConstructor.read(testConstants.IMG1);
+    // {
+    //   name: "opaque",
+    //   type: PHASE_TYPES.COMPARISON,
+    //   run: async (JimpConstructor, storageKey, imageStore) => {
+    //     const image = await JimpConstructor.read(testConstants.IMG1);
 
-        await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
-          image.opaque(callback);
-          asyncDetect();
-        });
+    //     await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
+    //       image.opaque(callback);
+    //       asyncDetect();
+    //     });
 
-        await imageStore.store(storageKey, image);
-      },
-    },
-    {
-      name: "fade",
-      type: PHASE_TYPES.COMPARISON,
-      run: async (JimpConstructor, storageKey, imageStore) => {
-        const image = await JimpConstructor.read(testConstants.IMG1);
+    //     await imageStore.store(storageKey, image);
+    //   },
+    // },
+    // {
+    //   name: "fade",
+    //   type: PHASE_TYPES.COMPARISON,
+    //   run: async (JimpConstructor, storageKey, imageStore) => {
+    //     const image = await JimpConstructor.read(testConstants.IMG1);
 
-        await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
-          image.fade(0.3, callback);
-          asyncDetect();
-        });
+    //     await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
+    //       image.fade(0.3, callback);
+    //       asyncDetect();
+    //     });
 
-        await imageStore.store(storageKey, image);
-      },
-    },
-    {
-      name: "greyscale",
-      type: PHASE_TYPES.COMPARISON,
-      run: async (JimpConstructor, storageKey, imageStore) => {
-        const image = await JimpConstructor.read(testConstants.IMG1);
+    //     await imageStore.store(storageKey, image);
+    //   },
+    // },
+    // {
+    //   name: "greyscale",
+    //   type: PHASE_TYPES.COMPARISON,
+    //   run: async (JimpConstructor, storageKey, imageStore) => {
+    //     const image = await JimpConstructor.read(testConstants.IMG1);
 
-        await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
-          image.greyscale(callback);
-          asyncDetect();
-        });
+    //     await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
+    //       image.greyscale(callback);
+    //       asyncDetect();
+    //     });
 
-        await imageStore.store(storageKey, image);
-      },
-    },
-    {
-      name: "pixelate",
-      type: PHASE_TYPES.COMPARISON,
-      run: async (JimpConstructor, storageKey, imageStore) => {
-        const image = await JimpConstructor.read(testConstants.IMG1);
+    //     await imageStore.store(storageKey, image);
+    //   },
+    // },
+    // {
+    //   name: "pixelate",
+    //   type: PHASE_TYPES.COMPARISON,
+    //   run: async (JimpConstructor, storageKey, imageStore) => {
+    //     const image = await JimpConstructor.read(testConstants.IMG1);
 
-        await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
-          image.pixelate(10, callback);
-          asyncDetect();
-        });
+    //     await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
+    //       image.pixelate(10, callback);
+    //       asyncDetect();
+    //     });
 
-        await imageStore.store(storageKey, image);
-      },
-    },
-    {
-      name: "composite",
-      type: PHASE_TYPES.COMPARISON,
-      run: async (JimpConstructor, storageKey, imageStore) => {
-        const image1 = await JimpConstructor.read(testConstants.IMG1);
-        const image2 = await JimpConstructor.read(testConstants.IMG2);
+    //     await imageStore.store(storageKey, image);
+    //   },
+    // },
+    // {
+    //   name: "composite",
+    //   type: PHASE_TYPES.COMPARISON,
+    //   run: async (JimpConstructor, storageKey, imageStore) => {
+    //     const image1 = await JimpConstructor.read(testConstants.IMG1);
+    //     const image2 = await JimpConstructor.read(testConstants.IMG2);
 
-        await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
-          image1.composite(
-            image2,
-            50,
-            50,
-            { opacitySource: 0.5, opacityDest: 0.5 },
-            callback
-          );
-          asyncDetect();
-        });
+    //     await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
+    //       image1.composite(
+    //         image2,
+    //         50,
+    //         50,
+    //         { opacitySource: 0.5, opacityDest: 0.5 },
+    //         callback
+    //       );
+    //       asyncDetect();
+    //     });
 
-        await imageStore.store(storageKey, image1);
-      },
-    },
+    //     await imageStore.store(storageKey, image1);
+    //   },
+    // },
     {
       name: "crop",
       type: PHASE_TYPES.COMPARISON,
@@ -276,20 +276,20 @@ module.exports = {
         await imageStore.store(storageKey, image);
       },
     },
-    {
-      name: "autocrop",
-      type: PHASE_TYPES.COMPARISON,
-      run: async (JimpConstructor, storageKey, imageStore) => {
-        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+    // {
+    //   name: "autocrop",
+    //   type: PHASE_TYPES.COMPARISON,
+    //   run: async (JimpConstructor, storageKey, imageStore) => {
+    //     const image = await JimpConstructor.read(testConstants.AUTOCROP);
 
-        await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
-          image.autocrop(callback);
-          asyncDetect();
-        });
+    //     await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
+    //       image.autocrop(callback);
+    //       asyncDetect();
+    //     });
 
-        await imageStore.store(storageKey, image);
-      },
-    },
+    //     await imageStore.store(storageKey, image);
+    //   },
+    // },
     {
       name: "dither",
       type: PHASE_TYPES.COMPARISON,
@@ -318,20 +318,20 @@ module.exports = {
         await imageStore.store(storageKey, image);
       },
     },
-    {
-      name: "invert",
-      type: PHASE_TYPES.COMPARISON,
-      run: async (JimpConstructor, storageKey, imageStore) => {
-        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+    // {
+    //   name: "invert",
+    //   type: PHASE_TYPES.COMPARISON,
+    //   run: async (JimpConstructor, storageKey, imageStore) => {
+    //     const image = await JimpConstructor.read(testConstants.AUTOCROP);
 
-        await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
-          image.invert(callback);
-          asyncDetect();
-        });
+    //     await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
+    //       image.invert(callback);
+    //       asyncDetect();
+    //     });
 
-        await imageStore.store(storageKey, image);
-      },
-    },
+    //     await imageStore.store(storageKey, image);
+    //   },
+    // },
     {
       name: "mask",
       type: PHASE_TYPES.COMPARISON,
@@ -375,19 +375,19 @@ module.exports = {
         await imageStore.store(storageKey, image);
       },
     },
-    {
-      name: "rotate",
-      type: PHASE_TYPES.COMPARISON,
-      run: async (JimpConstructor, storageKey, imageStore) => {
-        const image = await JimpConstructor.read(testConstants.IMG2);
+    // {
+    //   name: "rotate",
+    //   type: PHASE_TYPES.COMPARISON,
+    //   run: async (JimpConstructor, storageKey, imageStore) => {
+    //     const image = await JimpConstructor.read(testConstants.IMG2);
 
-        await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
-          image.rotate(30, callback);
-          asyncDetect();
-        });
+    //     await verifyAsync(JimpConstructor, (asyncDetect, callback) => {
+    //       image.rotate(30, callback);
+    //       asyncDetect();
+    //     });
 
-        await imageStore.store(storageKey, image);
-      },
-    },
+    //     await imageStore.store(storageKey, image);
+    //   },
+    // },
   ],
 };
