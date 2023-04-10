@@ -14,7 +14,18 @@ import mask from "@jimp-native/plugin-mask-napi";
 import resize from "@jimp-native/plugin-resize-napi";
 import rotate from "@jimp-native/plugin-rotate-napi";
 
-const plugins = [
+import contain from "@jimp/plugin-contain";
+import cover from "@jimp/plugin-cover";
+import displace from "@jimp/plugin-displace";
+import fisheye from "@jimp/plugin-fisheye";
+import gaussian from "@jimp/plugin-gaussian";
+import normalize from "@jimp/plugin-normalize";
+import print from "@jimp/plugin-print";
+import scale from "@jimp/plugin-scale";
+import shadow from "@jimp/plugin-shadow";
+import threshold from "@jimp/plugin-threshold";
+
+const nativePlugins = [
   blit,
   blur,
   circle,
@@ -29,9 +40,25 @@ const plugins = [
   rotate,
 ];
 
+const unoptimizedPlugins = [
+  contain,
+  cover,
+  displace,
+  fisheye,
+  gaussian,
+  normalize,
+  print,
+  scale,
+  shadow,
+  threshold,
+];
+
 export default (evChange) =>
-  plugins
+  [...nativePlugins, ...unoptimizedPlugins]
     .map((pluginInitializer: (evChange?: typeof jimpEvChange) => Object) =>
       pluginInitializer(evChange)
+    )
+    .map((plugin) =>
+      "class" in plugin || "constants" in plugin ? plugin : { class: plugin }
     )
     .reduce((result, currentPlugin) => mergeDeep(result, currentPlugin), {});

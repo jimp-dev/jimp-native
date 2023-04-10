@@ -84,7 +84,7 @@ async function runBenchmark() {
 
 async function runBenchmarks() {
   await runBenchmark();
-  Jimp = require("../../..");
+  Jimp = require("../");
   constructorName = "jimp-native";
   basePercent = 50;
   await runBenchmark();
