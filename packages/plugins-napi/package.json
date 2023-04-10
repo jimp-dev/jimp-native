@@ -28,9 +28,20 @@
     "@jimp-native/plugin-mask-napi": "^0.0.8",
     "@jimp-native/plugin-resize-napi": "^0.0.8",
     "@jimp-native/plugin-rotate-napi": "^0.0.8",
+    "@jimp/core": "^0.22.7",
+    "@jimp/plugin-contain": "^0.22.7",
+    "@jimp/plugin-cover": "^0.22.7",
+    "@jimp/plugin-displace": "^0.22.7",
+    "@jimp/plugin-fisheye": "^0.22.7",
+    "@jimp/plugin-gaussian": "^0.22.7",
+    "@jimp/plugin-normalize": "^0.22.7",
+    "@jimp/plugin-print": "^0.22.7",
+    "@jimp/plugin-scale": "^0.22.7",
+    "@jimp/plugin-shadow": "^0.22.7",
+    "@jimp/plugin-threshold": "^0.22.7",
     "timm": "^1.7.1"
   },
   "devDependencies": {
-    "@jimp/core": "^0.22.4"
+    "@jimp/core": "^0.22.7"
   }
 }

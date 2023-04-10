@@ -17,6 +17,6 @@
   "author": "Sjoerd Dal",
   "license": "MIT",
   "dependencies": {
-    "jimp": "^0.22.4"
+    "jimp": "^0.22.7"
   }
 }

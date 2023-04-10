@@ -23,8 +23,8 @@
     "@jimp-native/utils-cpp": "^0.0.8",
     "@jimp-native/utils-napi": "^0.0.8",
     "@jimp-native/utils-ts": "^0.0.8",
-    "@jimp/utils": "^0.22.4",
-    "jimp": "^0.22.4"
+    "@jimp/utils": "^0.22.7",
+    "jimp": "^0.22.7"
   },
   "author": "Sjoerd Dal",
   "license": "MIT"
