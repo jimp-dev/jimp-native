@@ -1,4 +1,4 @@
-const Jimp = require("../true-async");
+const Jimp = require("jimp-native");
 const path = require("path");
 
 async function run() {

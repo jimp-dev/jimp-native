@@ -1,56 +1,33 @@
-# Jimp native
+<div align="center">
+  <img width="200" height="200" src="https://raw.githubusercontent.com/sjoerd108/jimp-native/b62679c91a8011abc0970761ba29b0935b1837b5/assets/jimp_native_logo.png">
+  <h1>Jimp Native</h1>
+  <p>Make your sever-side Jimp code run 10x faster!</p>
+</div>
 
-## Make your sever-side Jimp code run 10x faster!
+Jimp-native is a fast C++ re-implementation of [Jimp](https://github.com/jimp-dev/jimp)
 
-Jimp-native is a fast C++ re-implementation of [Jimp](https://github.com/oliver-moran/jimp/tree/master/packages) with zero system dependencies and minimal overhead!
+# Installation
 
-## How do I start using it?
+ Run `npm install jimp-native` in your existing project and `import Jimp from 'jimp-native'`. Jimp native aims to be a drop-in replacement for Jimp. If your code is already working with Jimp it should also work with Jimp native. If you need even more performance, check out [Multithreading](#Multithreading)
 
-Simply run `npm install jimp-native` in your existing project and `require('jimp-native')`. Jimp native aims to be a drop-in replacement for Jimp. If your code is already working with Jimp it should also work with Jimp native. There is, however more you can do to speed up your image processing code.
+# Multithreading
 
-## Multithreading
+It's highly recommended to use the asynchronous version of an image operation where possible.
 
-Ever notice how Jimp operations let you specify a callback? These are normally not actually async. If you load this library with ``require('jimp-native/true-async')`` they will be async if you supply a callback. By default Jimp native will keep 2 threads around for this and will automatically create more to meet demand (up to the amount of processor threads available.)
+Depending on how you call Jimp native methods, calls will be either singlethreaded or multithreaded. There's two ways to have the library run in multithreaded mode for a given operation:
+ - This library ships an `Async` version of each method (e.g. `resize` becomes `resizeAsync`) these methods return a promise and also cause said operation to run on another thread.
+ - If you provide a callback to any covered image operation, that method will run on another thread.
 
-## Any system dependencies?
+# Documentation
 
-Aside from the usual build tools needed for node-gyp, nope! All algorithms are re-implemented by hand, only using the node-addon-api and what's in the C++ standard library.
+See [Jimp's](https://github.com/jimp-dev/jimp) documentation, this library should function the same way. The only difference you'll need to keep in mind is that any `Async` version of a call returns a promise and does not expect a callback function.
 
-## Accuracy
+# Accuracy
 
-Jimp native aims to be visually indistinguishable from Jimp. Tests are usually kept to a ∓ 0.392% tolerance for each colour component (in other words a 0 - 255 component can be off by one). There are cases where the tolerances are set higher, notably `blur` and some `resize` algorithms. Reasoning for this usually comes down to speed benefits of using another algorithm or using integer arithmetic over JavaScript doubles. In any case, unless you need 100% accuracy on a binary level, using this library should be fine output-wise.
+Jimp native aims to be visually indistinguishable from Jimp. Tests are usually kept to a ∓ 0.392% tolerance for each colour component of a pixel. There are cases where the tolerances are set higher, notably `blur` and some `resize` algorithms. Reasoning for this usually comes down to speed benefits of using another algorithm or using integer arithmetic over JavaScript doubles. In any case, unless you need 100% accuracy on a binary level, using this library should be fine output-wise.
 
-## Show me the numbers!
-
-Single threaded performance sees a ~2x improvement in most areas (very small images yield much better improvements but this usually comes down to microseconds, so it's not fair to compare). Here are some common tasks you may do on a server and a comparing the two in single-threaded performance:
-| Task                               | Jimp speed | Jimp native speed | Speed improvement |
-|------------------------------------|------------|-------------------|-------------------|
-| 2x resize (bilinear)               | 83.90ms    | 31.16ms           | 2.69x             |
-| Edge detect convolution            | 98.43ms    | 27.00ms           | 3.65x             |
-| Rotate by 90 degrees               | 28.66ms    | 7.35ms            | 3.90x             |
-| 0.5 resize using default algo      | 8.87ms     | 4.71ms            | 1.88x             |
-| Crop (10 px each side)             | 4.43ms     | 1.05ms            | 4.11x             |
-| Gaussian blur convolution          | 399.59ms   | 57.54ms           | 6.94x             |
-
-results shown above are from running these operations 15 times against 512 by 512 image and taking the average time. You can find the exact benchmark code used in the `benchmark/` folder. If you want to see more benchmarks and results on other image sizes then check the example-results file.
-
-### It gets even better with multithreading
-
-The numbers shown above are nice but this library really starts to shine when you allow your code to run asynchronously. Here's a comparison of the total time taken after starting 32 operations in parallel:
-
-| Task                               | Jimp speed | Jimp native speed | Speed improvement |
-|------------------------------------|------------|-------------------|-------------------|
-| 2x resize (bilinear)               | 2.61sec    | 226.82ms          | 11.50x            |
-| Edge detect convolution            | 12.98sec   | 409.89ms          | 31.67x            |
-| Rotate by 90 degrees               | 956.47ms   | 59.16ms           | 16.17x            |
-| Crop (10px each side)              | 129.95ms   | 11.67ms           | 11.14x            |
-| Gaussian blur convolution          | 3.27sec    | 189.00ms          | 17.29x            |
-
-Note: These results heavily depend on the CPU threads on your server. These results are from a benchmark ran on an Intel Core i7-6700K (4 cores, 8 threads) running at stock speed. You'll see better speeds with more cores and vice-versa. Again, check the benchmarks folder for more results.
-
-Aside from raw throughput, another advantage of multithreading is that when your image operations are running on another thread, your Node.js main loop can work on other important things, like handling HTTP requests or talking to a database.
-
-## What Jimp operations are currently covered?
+# Coverage
+The following Jimp plugins/functions have been optimized with this library:
 
 * composite ✅
 * blit ✅
@@ -90,87 +67,43 @@ Aside from raw throughput, another advantage of multithreading is that when your
 * shadow ⛔
 * threshold ⛔
 
-## How can I use multithreading?
+# Performance
 
-If you're already using callbacks and were using them as if they provided async behaviour, then you should be good to go. Here's an example of using the library in `true-async` mode:
+The following numbers are some samples from a benchmark on a `Core i9-13900K` using a 512x512 image. You can find the benchmark code and all results with differing image sizes in the [benchmark folder](https://github.com/sjoerd108/jimp-native/tree/move-preparations/packages/jimp-native/benchmark).
 
-```javascript
-const Jimp = require('jimp-native/true-async');
-const path = require('path');
+## Singlethreaded
+Operations using the synchronous API
 
-function onDone(err, image) {
-    console.log(`Circularize done.`);
+| Operation                   | avg. time Jimp | avg. time Jimp native |
+|-----------------------------|----------------|-----------------------|
+| Gaussian blur convolution   | 149.08ms       | 22.42ms               |
+| Rotate 90deg                | 11.25ms        | 1.77ms                |
+| Crop                        | 3.26ms         | 180.84μs              |
+| Default resize 2x           | 17.95ms        | 15.40ms               |
+| Bicubic resize 2x           | 59.44ms        | 18.19ms               |
+| Nearest neighbour resize 2x | 18.04ms        | 1.55ms                |
 
-    if (err) {
-        console.error(err);
-        return;
-    }
+## Multithreaded
+Operations using the callback/async API (32 calls launched at the same time). Imagine a busy web server handling tons of requests at once.
+> Only jimp native is able to use multiple threads out of the box, so note that while the benchmark runs the same code on both implementations, only jimp native is actually multithreading in these examples. In other words, the more cores your CPU has the more drastic the improvement.
 
-    image.write(path.join(__dirname, 'result.png'), () => {
-        console.log(`Done!`);
-    });
-}
+| Operation                   | avg. time Jimp | avg. time Jimp native |
+|-----------------------------|----------------|-----------------------|
+| Gaussian blur convolution   | 1.92sec        | 28.06ms               |
+| Rotate 90deg                | 666.27ms       | 10.99ms               |
+| Crop                        | 190.25ms       | 3.47ms                |
+| Default resize 2x           | 748.54ms       | 44.30ms               |
 
-Jimp
-    .read(path.join(__dirname, 'example.png'))
-    .then((image) => {
-        console.log('Starting resize...');
-
-        image.resize(128, 128, (err) => {
-            console.log(`Resize done.`);
-
-            if (err) {
-                onDone(err);
-            }
-
-            console.log('Starting circle...');
-
-            image.circle(onDone);
-
-            console.log(`The main thread isn't blocking on circle!`);
-        });
-
-        console.log(`The main thread isn't blocking on resize!`);
-    });
-```
-
-Alternatively, if you prefer async/await then you can use {methodName}Async for any optimized function available and use them as a promise:
-
-```Javascript
-const Jimp = require('jimp-native/true-async');
-const path = require('path');
-
-async function run () {
-    const image = await Jimp.read(path.join(__dirname, 'example.png'));
-
-    await image.resizeAsync(128, 128);
-    await image.circleAsync();
-
-    image.write(path.join(__dirname, 'result.png'), () => {
-        process.exit(0);
-    });
-}
-
-run().catch(console.error);
-
-setInterval(() => {
-    console.log('Main thread can do whatever it wants.');
-}, 5);
-```
-
-Jimp native will automatically scale the amount of threads to meet demand. By default it'll keep 2 threads around if you use the async library. It'll spawn more threads temporarily if there's enough work queued up.
-
-## //TODO
+# // TODO
 
 Here are some things I'd like to look into doing with this project:
 
 * Implement remaining Jimp plugins / functions
 * Handle image decoding in C++
-* Explore potential port to web assembly (I'm not familiar with WASM, I'm not sure how feasible it is)
-* Optimize default resize algorithm further (It beats JS, but it I feel like it can be a lot better)
+* Build WASM version
 * Improve the testing harness and benchmarking tool
 
-## Licensing
+# Licensing
 
 Most C++ optimized functions are based on their JavaScript equivalents in [Jimp](https://github.com/oliver-moran/jimp/tree/master/packages). Jimp and Jimp native are both available under the MIT license. For the original license, see [ORIGINAL_JIMP_LICENSE](https://github.com/sjoerd108/jimp-native/blob/main/ORIGINAL_JIMP_LICENSE), for the license that applies to this port, see [LICENSE](https://github.com/sjoerd108/jimp-native/blob/main/LICENSE).
 
