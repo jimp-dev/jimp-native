@@ -1,7 +1,7 @@
 {
   "name": "jimp-native",
   "version": "0.1.0-alpha.5",
-  "description": "\"Speed up Jimp operations by using native C++ code where it matters",
+  "description": "Speed up Jimp operations by using native C++ code where it matters",
   "main": "dist/index.js",
   "module": "es/index.js",
   "types": "src/index.ts",
