@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-color-cpp",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "description": "Platform agnostic C++ implementation of plugin-color",
   "main": "index.js",
   "scripts": {
