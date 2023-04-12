@@ -1,6 +1,6 @@
 {
   "name": "jimp-native",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "description": "\"Speed up Jimp operations by using native C++ code where it matters",
   "main": "dist/index.js",
   "module": "es/index.js",
@@ -28,7 +28,7 @@
   "author": "Sjoerd Dal",
   "license": "MIT",
   "dependencies": {
-    "@jimp-native/plugins-napi": "^0.1.0-alpha.3",
+    "@jimp-native/plugins-napi": "^0.1.0-alpha.4",
     "@jimp/core": "^0.22.7",
     "@jimp/custom": "^0.22.7",
     "@jimp/types": "^0.22.7",
