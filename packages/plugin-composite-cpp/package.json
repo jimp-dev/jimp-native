@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-composite-cpp",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "Platform agnostic C++ implementation of the core jimp composite method",
   "main": "index.js",
   "scripts": {

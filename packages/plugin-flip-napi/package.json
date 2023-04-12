@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-flip-napi",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "C++ implementation of plugin-flip using the Node Addon API",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -18,10 +18,10 @@
     "build:node": "babel src -d dist --source-maps --extensions \".ts\" --config-file ../../babel.config.js"
   },
   "dependencies": {
-    "@jimp-native/plugin-flip-cpp": "^0.1.0-alpha.0",
-    "@jimp-native/utils-cpp": "^0.1.0-alpha.0",
-    "@jimp-native/utils-napi": "^0.1.0-alpha.0",
-    "@jimp-native/utils-ts": "^0.1.0-alpha.0",
+    "@jimp-native/plugin-flip-cpp": "^0.1.0-alpha.1",
+    "@jimp-native/utils-cpp": "^0.1.0-alpha.1",
+    "@jimp-native/utils-napi": "^0.1.0-alpha.1",
+    "@jimp-native/utils-ts": "^0.1.0-alpha.1",
     "@jimp/utils": "^0.22.7",
     "jimp": "^0.22.7"
   },

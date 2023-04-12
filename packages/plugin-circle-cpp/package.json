@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-circle-cpp",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "Platform agnostic C++ implementation of plugin-circle",
   "main": "index.js",
   "scripts": {
