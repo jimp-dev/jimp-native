@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-crop-cpp",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Platform agnostic C++ implementation of plugin-crop",
   "main": "index.js",
   "scripts": {
