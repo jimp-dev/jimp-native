@@ -1,7 +1,7 @@
 const { BENCHMARK_STAGES } = require("./constants");
 
 let stagesSelected = [...BENCHMARK_STAGES];
-let benchmarkRepeat = 15;
+let benchmarkRepeat = 32;
 
 function printStagesAvailable() {
   console.log(`Available stages are: ${BENCHMARK_STAGES.join(", ")}`);
