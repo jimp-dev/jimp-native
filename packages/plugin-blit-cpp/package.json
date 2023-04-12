@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-blit-cpp",
-  "version": "0.0.8",
+  "version": "0.1.0-alpha.0",
   "description": "Platform agnostic C++ implementation of plugin-blit",
   "main": "index.js",
   "scripts": {
