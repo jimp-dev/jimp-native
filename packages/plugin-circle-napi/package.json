@@ -7,10 +7,11 @@
   "module": "es/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node-gyp rebuild -j max",
+    "postinstall": "npm run build:cpp",
     "clean": "rimraf ./dist ./es ./build",
     "build": "npm run clean && npm run build:node && npm run build:module && npm run build:cpp",
     "build:cpp": "node-gyp rebuild -j max",
+    "prebuild:cpp": "node -e 'require(`@jimp-native/utils-napi/printBinding`)' > binding.gypi",
     "build:cpp:debug": "node-gyp -j max rebuild --debug",
     "build:watch": "npm run build:node:debug -- -- --watch --verbose",
     "build:debug": "npm run build:node:debug",
