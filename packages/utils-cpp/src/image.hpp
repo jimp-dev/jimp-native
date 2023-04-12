@@ -73,8 +73,8 @@ public:
         height(img.height),
         pixelCount(img.pixelCount),
         rgbaArrayLength(img.rgbaArrayLength),
-        memoryManagedExternally(img.memoryManagedExternally),
-        imageData(img.imageData) {
+        memoryManagedExternally(img.memoryManagedExternally) {
+        this->imageData = img.imageData;
         img.moved = true;
     }
 
