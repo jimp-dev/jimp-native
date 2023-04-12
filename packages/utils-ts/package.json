@@ -17,6 +17,10 @@
   "author": "Sjoerd Dal",
   "license": "MIT",
   "dependencies": {
-    "jimp": "^0.22.7"
+    "jimp": "^0.22.7",
+    "@jimp/core": "^0.22.7"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -27,5 +27,8 @@
     "jimp": "^0.22.7"
   },
   "author": "Sjoerd Dal",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }
