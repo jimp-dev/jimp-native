@@ -3,7 +3,7 @@
 .kdev4/
 .vscode/
 
-# Not needed in production
+# Not needed in production builds
 test/
 node_modules/
 build/
