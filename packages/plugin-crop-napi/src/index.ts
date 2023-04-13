@@ -97,7 +97,8 @@ const autocrop = function (
         };
       }
     | number
-    | boolean,
+    | boolean
+    | ImageCallback<CropPlugin> = {},
   arg2?: ImageCallback<CropPlugin> | boolean,
   arg3?: ImageCallback<CropPlugin>
 ) {
@@ -136,6 +137,10 @@ const autocrop = function (
     cropOnlyFrames = arg2;
   }
 
+  if (typeof arg1 === "function") {
+    cb = arg1;
+  }
+
   if (typeof arg2 === "function") {
     cb = arg2;
   }
@@ -156,14 +161,16 @@ const autocrop = function (
     const originalCallback = cb;
 
     // Ensures updateBitmap gets called before the image gets to user code.
-    cb = function (err) {
+    cb = function (err, image, newWidth, newHeight) {
       if (err) {
         return originalCallback.call(this, err, null);
       }
 
+      this.bitmap.width = newWidth;
+      this.bitmap.height = newHeight;
       updateBitmap();
       originalCallback.call(this, null, this);
-    };
+    } as ImageCallback<CropPlugin>;
 
     cb.bind(this);
   }

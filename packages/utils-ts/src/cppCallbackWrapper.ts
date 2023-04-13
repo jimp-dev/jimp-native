@@ -34,36 +34,16 @@ export const cppCallbackWrapper = (
 
   jimpImage.bitmap.data = bitmapDenyProxy as unknown as Buffer;
 
-  return (error) => {
+  return (error, ...args) => {
     jimpImage.bitmap.data = originalBitmap;
 
     if (typeof error === "string") {
       error = new Error(error);
     }
 
-    userCallback.bind(jimpImage).call(jimpImage, error, jimpImage);
+    userCallback.bind(jimpImage).call(jimpImage, error, jimpImage, ...args);
   };
 };
-
-/**
- * Creates a callback that can be used with addon code that either calls resolve or reject depending on the outcome.
- * Uses cppCallbackWrapper under the hood for thread safety and error handling.
- *
- * @param resolve
- * @param reject
- */
-export const cppPromiseHandler = (
-  jimpImage: Jimp,
-  resolve: Function,
-  reject: Function
-) =>
-  cppCallbackWrapper(jimpImage, (err, value) => {
-    if (err) {
-      return reject(err);
-    }
-
-    resolve(value);
-  });
 
 /**
  * Turns a callback-based image operation into an async one.
@@ -78,6 +58,12 @@ export const wrapAsync = <
 ) =>
   function (...args) {
     return new Promise((resolve, reject) => {
-      callbackImplementation(...args, cppPromiseHandler(this, resolve, reject));
+      callbackImplementation.call(this, ...args, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+
+        resolve(result);
+      });
     });
   } as PromisifiedFunction<ImplementationT>;

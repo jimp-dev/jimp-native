@@ -71,6 +71,21 @@ module.exports = {
       },
     },
     {
+      name: "auto-simple-async",
+      type: PHASE_TYPES.COMPARISON,
+      run: async (JimpConstructor, storageKey, imageStore) => {
+        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+
+        if (image.autocropAsync) {
+          await image.autocropAsync();
+        } else {
+          image.autocrop();
+        }
+
+        await imageStore.store(storageKey, image);
+      },
+    },
+    {
       name: "auto-no-tolerance",
       type: PHASE_TYPES.COMPARISON,
       run: async (JimpConstructor, storageKey, imageStore) => {
