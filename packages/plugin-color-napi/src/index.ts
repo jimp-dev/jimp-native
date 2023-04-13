@@ -243,9 +243,9 @@ const plugin: () => PartialAsyncColorPlugin = () => ({
   sepia,
   sepiaAsync: wrapAsync(sepia),
   convolution,
-  convoluteAsync: wrapAsync(convolution),
+  convolutionAsync: wrapAsync(convolution),
   convolute,
-  convolutionAsync: wrapAsync(convolute),
+  convoluteAsync: wrapAsync(convolute),
   pixelate,
   pixelateAsync: wrapAsync(pixelate),
 });
