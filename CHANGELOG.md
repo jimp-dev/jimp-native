@@ -1,6 +1,14 @@
 
 # Changelog
 
+## V0.1.0-alpha.7 - 2023-04-14
+
+- Moved to official Jimp organization 🎉
+- Use Jimp's official plugin system for optimized implementation overrides
+- Added TypeScript typings
+- Improved default resize algorithm
+- Fixed a memory leak in convolution code
+
 ## v0.0.8 - 2022-10-22
 
 - Updated upstream Jimp, fixing an NPM audit security warning.
