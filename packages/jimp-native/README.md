@@ -87,12 +87,12 @@ Operations using the synchronous API
 Operations using the callback/async API (32 calls launched at the same time). Imagine a busy web server handling tons of requests at once.
 > Only jimp native is able to use multiple threads out of the box, so note that while the benchmark runs the same code on both implementations, only jimp native is actually multithreading in these examples. In other words, the more cores your CPU has the more drastic the improvement.
 
-| Operation                   | avg. time Jimp | avg. time Jimp native |
-|-----------------------------|----------------|-----------------------|
-| Gaussian blur convolution   | 1.92sec        | 28.06ms               |
-| Rotate 90deg                | 666.27ms       | 10.99ms               |
-| Crop                        | 190.25ms       | 3.47ms                |
-| Default resize 2x           | 748.54ms       | 44.30ms               |
+| Operation                   | time taken Jimp | time taken Jimp native |
+|-----------------------------|-----------------|------------------------|
+| Gaussian blur convolution   | 4.73sec         | 56.52ms                |
+| Rotate 90deg                | 401.64ms        | 14.73ms                |
+| Crop                        | 105.03ms        | 1.90ms                 |
+| Default resize 2x           | 589.60ms        | 49.05ms                |
 
 # // TODO
 
