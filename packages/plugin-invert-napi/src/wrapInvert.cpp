@@ -5,7 +5,7 @@
 void wrapInvert (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory) {
     Napi::Env env = info.Env();
 
-    if(info.Length() < 2 || info.Length() > 3) {
+    if(info.Length() < 1 || info.Length() > 2) {
         throw Napi::Error::New(env, "Invalid number of arguments");
     }
 
@@ -14,8 +14,8 @@ void wrapInvert (const Napi::CallbackInfo& info, ReferenceFactory& referenceFact
     }
 
     std::optional<Napi::Function> callback;
-    if (info.Length() == 3 && info[2].IsFunction()) {
-        callback = info[2].As<Napi::Function>();
+    if (info.Length() == 2 && info[1].IsFunction()) {
+        callback = info[1].As<Napi::Function>();
     }
 
     Napi::Buffer<uint8_t> buffer = info[0].As<Napi::Buffer<uint8_t>>();
