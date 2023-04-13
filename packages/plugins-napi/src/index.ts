@@ -25,7 +25,7 @@ import scale from "@jimp/plugin-scale";
 import shadow from "@jimp/plugin-shadow";
 import threshold from "@jimp/plugin-threshold";
 
-const nativePlugins = [
+export const nativePlugins = [
   blit,
   blur,
   circle,
@@ -38,9 +38,9 @@ const nativePlugins = [
   mask,
   resize,
   rotate,
-];
+] as const;
 
-const unoptimizedPlugins = [
+export const unoptimizedPlugins = [
   contain,
   cover,
   displace,
@@ -51,10 +51,15 @@ const unoptimizedPlugins = [
   scale,
   shadow,
   threshold,
-];
+] as const;
 
-export default (evChange) =>
-  [...nativePlugins, ...unoptimizedPlugins]
+export const combinedPlugins = [
+  ...unoptimizedPlugins,
+  ...nativePlugins,
+] as const;
+
+export const init = (evChange) =>
+  combinedPlugins
     .map((pluginInitializer: (evChange?: typeof jimpEvChange) => Object) =>
       pluginInitializer(evChange)
     )
