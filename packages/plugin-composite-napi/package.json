@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-composite-napi",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.8",
   "description": "C++ implementation of plugin-composite using the Node Addon API",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -19,11 +19,11 @@
     "build:node": "babel src -d dist --source-maps --extensions \".ts\" --config-file ../../babel.config.js"
   },
   "dependencies": {
-    "@jimp-native/plugin-color-cpp": "^0.1.0-alpha.7",
-    "@jimp-native/plugin-composite-cpp": "^0.1.0-alpha.7",
-    "@jimp-native/utils-cpp": "^0.1.0-alpha.7",
-    "@jimp-native/utils-napi": "^0.1.0-alpha.7",
-    "@jimp-native/utils-ts": "^0.1.0-alpha.7",
+    "@jimp-native/plugin-color-cpp": "^0.1.0-alpha.8",
+    "@jimp-native/plugin-composite-cpp": "^0.1.0-alpha.8",
+    "@jimp-native/utils-cpp": "^0.1.0-alpha.8",
+    "@jimp-native/utils-napi": "^0.1.0-alpha.8",
+    "@jimp-native/utils-ts": "^0.1.0-alpha.8",
     "@jimp/utils": "^0.22.7",
     "jimp": "^0.22.7"
   },
