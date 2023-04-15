@@ -19,7 +19,7 @@ function rotate(
   resize?: boolean | string | ImageCallback<PluginRotate>,
   cb?: ImageCallback<PluginRotate>
 ) {
-  if (typeof resize === "undefined" || resize === null) {
+  if (typeof resize === "undefined" || resize === undefined) {
     resize = true;
   }
 
@@ -47,28 +47,39 @@ function rotate(
       /**
        * Resizing behaviour can be done in JS without too much slowdown. Intensive operations such as blit are also
        * covered in C++ land.
+       *
+       * If we're doing a simple 90 degree rotation check if we have to swap width/height, otherwise actually calculate
+       * the new width/height for the rotation.
        */
-      const radians = (degrees * Math.PI) / 180;
-      const cosine = Math.cos(radians);
-      const sine = Math.sin(radians);
+      if (degrees % 90 === 0) {
+        if (degrees % 180 === 90) {
+          const oldWidth = width;
+          width = height;
+          height = oldWidth;
+        }
+      } else {
+        const radians = (degrees * Math.PI) / 180;
+        const cosine = Math.cos(radians);
+        const sine = Math.sin(radians);
 
-      width =
-        Math.ceil(
-          Math.abs(originalImage.getWidth() * cosine) +
-            Math.abs(originalImage.getHeight() * sine)
-        ) + 1;
-      height =
-        Math.ceil(
-          Math.abs(originalImage.getWidth() * sine) +
-            Math.abs(originalImage.getHeight() * cosine)
-        ) + 1;
+        width =
+          Math.ceil(
+            Math.abs(originalImage.getWidth() * cosine) +
+              Math.abs(originalImage.getHeight() * sine)
+          ) + 1;
+        height =
+          Math.ceil(
+            Math.abs(originalImage.getWidth() * sine) +
+              Math.abs(originalImage.getHeight() * cosine)
+          ) + 1;
 
-      if (width % 2 !== 0) {
-        width++;
-      }
+        if (width % 2 !== 0) {
+          width++;
+        }
 
-      if (height % 2 !== 0) {
-        height++;
+        if (height % 2 !== 0) {
+          height++;
+        }
       }
 
       const newWidthHeight = ensureInteger(
