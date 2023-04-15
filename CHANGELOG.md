@@ -1,6 +1,11 @@
 
 # Changelog
 
+## V0.1.0-alpha.8 - 2023-04-15
+
+- Fixed build issues on Windows
+- Fixed a bug where rotating by a multiple of 90 degrees would resize the image slightly
+
 ## V0.1.0-alpha.7 - 2023-04-14
 
 - Moved to official Jimp organization 🎉
