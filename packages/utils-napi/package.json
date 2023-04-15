@@ -14,5 +14,8 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public"
+  },
+  "bin": {
+    "printBinding": "./printBinding.js"
   }
 }

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * Script that creates a binding.gypi file in the project it's required from.
  */
