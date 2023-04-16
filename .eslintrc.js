@@ -41,28 +41,9 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["*.test.*", "**/types/**/test.ts"],
-
-      globals: {
-        xit: true,
-        it: true,
-        describe: true,
-        before: true,
-        after: true,
-        test: true,
-      },
+      files: ["*.spec.*", "**/types/**/spec.ts"],
       rules: {
-        "import/no-extraneous-dependencies": "off",
-        "import/namespace": "off",
-        "no-import-assign": "off",
-        "no-unused-expressions": "off",
-        "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-explicit-any": "off",
-        "require-atomic-updates": "off",
-        "max-nested-callbacks": "off",
-        "@typescript-eslint/ban-ts-ignore": "off",
-        "jsdoc/require-jsdoc": "off",
+        "no-promise-executor-return": "off",
       },
     },
   ],
