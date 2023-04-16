@@ -6,7 +6,7 @@
   "types": "src/index.ts",
   "module": "es/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config ../../jest.config.js ./src --rootDir \".\" --coverage --collectCoverageFrom \"<rootDir>/**/*.ts\"",
     "postinstall": "npm run build:cpp",
     "clean": "rimraf ./dist ./es ./build",
     "build": "npm run clean && npm run build:node && npm run build:module && npm run build:cpp",
