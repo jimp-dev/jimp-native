@@ -29,6 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@jimp-native/plugins-napi": "^0.1.0-alpha.8",
+    "@jimp-native/utils-ts": "^0.1.0-alpha.8",
     "@jimp/core": "^0.22.7",
     "@jimp/custom": "^0.22.7",
     "@jimp/types": "^0.22.7",

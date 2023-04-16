@@ -30,5 +30,8 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@jimp-native/utils-testing": "^0.1.0-alpha.8"
   }
 }

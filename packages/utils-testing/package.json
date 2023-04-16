@@ -1,0 +1,18 @@
+{
+  "name": "@jimp-native/utils-testing",
+  "private": true,
+  "version": "0.1.0-alpha.8",
+  "description": "Utilities for testing and comparing plugin re-implementations",
+  "main": "index.ts",
+  "scripts": {},
+  "author": "Sjoerd Dal",
+  "license": "MIT",
+  "devDependencies": {
+    "@jimp/custom": "^0.22.7",
+    "@jimp/plugins": "^0.22.7",
+    "@jimp/types": "^0.22.7",
+    "@jimp-native/utils-ts": "^0.1.0-alpha.8",
+    "@jimp/core": "^0.22.7",
+    "jimp": "^0.22.7"
+  }
+}

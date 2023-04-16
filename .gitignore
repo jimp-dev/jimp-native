@@ -7,6 +7,10 @@ test/tmp
 *.kate-swp
 .vscode/
 
+# Test outputs
+test_output/
+coverage/
+
 # Debug output
 *.callgrind.out.*
 

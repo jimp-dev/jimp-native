@@ -2,6 +2,7 @@ import configure from "@jimp/custom";
 import jsTypes from "@jimp/types";
 import { init, combinedPlugins } from "@jimp-native/plugins-napi";
 import { coreMethods } from "./coreMethods";
+import { Mutable } from "@jimp-native/utils-ts";
 
 const nativeFlag = () => ({
   __native: true,
@@ -16,10 +17,6 @@ const finalPluginListType = [
 const plugins = [init, nativeFlag, coreMethods];
 
 const types = [jsTypes] as const;
-
-type Mutable<T> = {
-  -readonly [K in keyof T]: T[K];
-};
 
 export default configure<
   Mutable<typeof types>,

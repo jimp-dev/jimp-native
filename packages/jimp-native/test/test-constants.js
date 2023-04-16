@@ -2,16 +2,18 @@ const Jimp = require("jimp");
 const constants = require("@jimp/core/dist/constants");
 const path = require("path");
 
+const imageRoot = path.join(__dirname, "..", "..", "..", "assets", "testing");
+
 module.exports = {
   ...constants,
-  IMG1: path.join(__dirname, "assets", "images", "base_test.png"),
-  IMG2: path.join(__dirname, "assets", "images", "qbist_128_1.png"),
-  IMG3: path.join(__dirname, "assets", "images", "qbist_128_2.png"),
-  IMG4: path.join(__dirname, "assets", "images", "qbist_512_1.png"),
-  IMG5: path.join(__dirname, "assets", "images", "qbist_512_2.png"),
-  MASK_1: path.join(__dirname, "assets", "images", "mask_simple.png"),
-  MASK_2: path.join(__dirname, "assets", "images", "mask_aliasing.png"),
-  AUTOCROP: path.join(__dirname, "assets", "images", "autocrop_test.png"),
+  IMG1: path.join(imageRoot, "base_test.png"),
+  IMG2: path.join(imageRoot, "qbist_128_1.png"),
+  IMG3: path.join(imageRoot, "qbist_128_2.png"),
+  IMG4: path.join(imageRoot, "qbist_512_1.png"),
+  IMG5: path.join(imageRoot, "qbist_512_2.png"),
+  MASK_1: path.join(imageRoot, "mask_simple.png"),
+  MASK_2: path.join(imageRoot, "mask_aliasing.png"),
+  AUTOCROP: path.join(imageRoot, "autocrop_test.png"),
 
   // Output storage folder, for visual inspection purposes.
   VISUAL_OUT_DIR: path.join(__dirname, "visual-output"),
