@@ -55,23 +55,24 @@ describe("plugin-composite-napi", () => {
         }
       );
 
-      makeComparisonTest(
-        `composite-${mode}-xy-offset`,
-        JimpCustom,
-        "native",
-        async (JimpConstructor) => {
-          const target = await JimpConstructor.read(testConstants.IMG_128_1);
-          const source = await JimpConstructor.read(testConstants.IMG_128_2);
+      // Waiting on merge to fix: https://github.com/jimp-dev/jimp/pull/1226
+      // makeComparisonTest(
+      //   `composite-${mode}-xy-offset`,
+      //   JimpCustom,
+      //   "native",
+      //   async (JimpConstructor) => {
+      //     const target = await JimpConstructor.read(testConstants.IMG_128_1);
+      //     const source = await JimpConstructor.read(testConstants.IMG_128_2);
 
-          target.composite(source, 32, -32, {
-            mode,
-            opacityDest: 1,
-            opacitySource: 1,
-          });
+      //     target.composite(source, 32, -32, {
+      //       mode,
+      //       opacityDest: 1,
+      //       opacitySource: 1,
+      //     });
 
-          return target;
-        }
-      );
+      //     return target;
+      //   }
+      // );
     });
 
   makeComparisonTest(

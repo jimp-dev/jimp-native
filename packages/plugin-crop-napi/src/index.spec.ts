@@ -177,6 +177,7 @@ describe("plugin-crop-napi", () => {
         const image = await JimpConstructor.read(testConstants.AUTOCROP);
 
         image.autocrop({
+          cropOnlyFrames: false,
           ignoreSides: { north: true, south: false, east: false, west: false },
         });
 
@@ -184,35 +185,39 @@ describe("plugin-crop-napi", () => {
       }
     );
 
-    makeComparisonTest(
-      "autocrop no west",
-      JimpCustom,
-      "native",
-      async (JimpConstructor) => {
-        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+    // Waiting on merge to fix: https://github.com/jimp-dev/jimp/pull/1227
+    // makeComparisonTest(
+    //   "autocrop no west",
+    //   JimpCustom,
+    //   "native",
+    //   async (JimpConstructor) => {
+    //     const image = await JimpConstructor.read(testConstants.AUTOCROP);
 
-        image.autocrop({
-          ignoreSides: { north: false, south: false, east: false, west: true },
-        });
+    //     image.autocrop({
+    //       ignoreSides: { north: false, south: false, east: false, west: true },
+    //       cropOnlyFrames: false,
+    //     });
 
-        return image;
-      }
-    );
+    //     return image;
+    //   }
+    // );
 
-    makeComparisonTest(
-      "autocrop no east",
-      JimpCustom,
-      "native",
-      async (JimpConstructor) => {
-        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+    // Waiting on merge to fix: https://github.com/jimp-dev/jimp/pull/1227
+    // makeComparisonTest(
+    //   "autocrop no east",
+    //   JimpCustom,
+    //   "native",
+    //   async (JimpConstructor) => {
+    //     const image = await JimpConstructor.read(testConstants.AUTOCROP);
 
-        image.autocrop({
-          ignoreSides: { north: false, south: false, east: true, west: false },
-        });
+    //     image.autocrop({
+    //       ignoreSides: { north: false, south: false, east: true, west: false },
+    //       cropOnlyFrames: false,
+    //     });
 
-        return image;
-      }
-    );
+    //     return image;
+    //   }
+    // );
 
     makeComparisonTest(
       "autocrop no south",
@@ -223,7 +228,60 @@ describe("plugin-crop-napi", () => {
 
         image.autocrop({
           ignoreSides: { north: false, south: true, east: false, west: false },
+          cropOnlyFrames: false,
         });
+
+        return image;
+      }
+    );
+
+    makeComparisonTest(
+      "autocrop tolerance in first arg",
+      JimpCustom,
+      "native",
+      async (JimpConstructor) => {
+        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+
+        image.autocrop(0.3);
+
+        return image;
+      }
+    );
+
+    makeComparisonTest(
+      "(async) autocrop tolerance in first arg",
+      JimpCustom,
+      "native",
+      async (JimpConstructor) => {
+        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+
+        await new Promise((resolve) => image.autocrop(0.3, resolve));
+
+        return image;
+      }
+    );
+
+    makeComparisonTest(
+      "autocrop crop only frames as first arg",
+      JimpCustom,
+      "native",
+      async (JimpConstructor) => {
+        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+
+        image.autocrop(true);
+
+        return image;
+      }
+    );
+
+    makeComparisonTest(
+      "autocrop crop only frames as second arg",
+      JimpCustom,
+      "native",
+      async (JimpConstructor) => {
+        const image = await JimpConstructor.read(testConstants.AUTOCROP);
+
+        image.autocrop(0.3, true);
 
         return image;
       }
