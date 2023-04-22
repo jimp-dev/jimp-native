@@ -39,9 +39,11 @@ export const makeComparisonTest = <JimpCustom extends BaseJimp>(
   otherConstructorName: string,
   testFunction: TestFunction,
   maxTolerance: number = 1
-) => {
+) =>
   it(`should pass comparison test: ${testName} | ±${maxTolerance} | original vs. ${otherConstructorName}`, async () => {
     const originalResult = await testFunction(Jimp as BaseJimp);
+    // eslint-disable-next-line dot-notation
+    expect(originalResult["__custom"]).toBeFalsy();
 
     const testNameInFile = testName.replace(/ /g, "_");
 
@@ -50,6 +52,8 @@ export const makeComparisonTest = <JimpCustom extends BaseJimp>(
     );
 
     const otherResult = await testFunction<JimpCustom>(otherConstructor);
+    // eslint-disable-next-line dot-notation
+    expect(otherResult["__custom"]).toBeTruthy();
 
     await otherResult.writeAsync(
       path.join(outputDir, `${testNameInFile}__${otherConstructorName}.png`)
@@ -86,4 +90,3 @@ export const makeComparisonTest = <JimpCustom extends BaseJimp>(
       );
     }
   });
-};

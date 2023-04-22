@@ -449,7 +449,13 @@ describe("plugin-color-napi", () => {
       async (JimpConstructor) => {
         const image = await JimpConstructor.read(testConstants.BASE_TEST);
 
-        image.convolute(GAUSSIAN_BLUR_KERNEL);
+        image.convolute(
+          GAUSSIAN_BLUR_KERNEL,
+          0,
+          0,
+          image.getWidth(),
+          image.getHeight()
+        );
 
         return image;
       }
@@ -476,7 +482,14 @@ describe("plugin-color-napi", () => {
         const image = await JimpConstructor.read(testConstants.BASE_TEST);
 
         await new Promise((resolve) =>
-          image.convolute(GAUSSIAN_BLUR_KERNEL, resolve)
+          image.convolute(
+            GAUSSIAN_BLUR_KERNEL,
+            0,
+            0,
+            image.getWidth(),
+            image.getHeight(),
+            resolve
+          )
         );
 
         return image;

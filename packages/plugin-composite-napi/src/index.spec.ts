@@ -17,6 +17,7 @@ const JimpCustom = constructJimpWithOverrides({
 describe("plugin-composite-napi", () => {
   Object.keys(JimpCustom)
     .filter((key) => key.startsWith("BLEND_"))
+    .map((key) => JimpCustom[key])
     .forEach((mode) => {
       makeComparisonTest(
         `composite-${mode}-src-1-dst-1`,
