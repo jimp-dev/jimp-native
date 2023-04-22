@@ -34,14 +34,6 @@ function resize(
     | ImageCallback<PluginResize> = "defaultInterpolation",
   cb?: ImageCallback<PluginResize>
 ) {
-  if (typeof width !== "number") {
-    return throwError.call(this, "Width must be of type Number", cb);
-  }
-
-  if (typeof height !== "number") {
-    return throwError.call(this, "Height must by of type Number", cb);
-  }
-
   if (typeof mode === "function" && typeof cb === "undefined") {
     cb = mode;
     mode = "defaultInterpolation";
@@ -55,18 +47,18 @@ function resize(
     height = this.bitmap.height * (width / this.bitmap.width);
   }
 
-  if (width < 0) {
-    return throwError.call(this, "Width must be a positive number", cb);
+  if (width <= 0) {
+    return throwError.call(this, "Width must be greater than zero", cb);
   }
 
-  if (height < 0) {
-    return throwError.call(this, "Height must be a positive number", cb);
+  if (height <= 0) {
+    return throwError.call(this, "Height must be greater than zero", cb);
   }
 
   let modeNumber = RESIZE_METHOD_MAP[mode as string];
 
   if (typeof modeNumber !== "number") {
-    modeNumber = -1;
+    modeNumber = 99;
   }
 
   width = ensureInteger(width);
