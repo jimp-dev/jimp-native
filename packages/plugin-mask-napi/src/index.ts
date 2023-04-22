@@ -14,17 +14,12 @@ const addon = require(`../build/${getAddonReleaseVersion()}/plugin-mask-napi.nod
 
 const mask = function (
   sourceImage: Jimp,
-  xOffset?: number | ImageCallback<AsyncPlugin<Mask>>,
-  yOffset?: number,
+  xOffset = 0,
+  yOffset = 0,
   cb?: ImageCallback<AsyncPlugin<Mask>>
 ) {
   if (!(sourceImage instanceof this.constructor)) {
     return throwError.call(this, "sourceImage must be a Jimp image");
-  }
-
-  if (typeof xOffset === "function") {
-    cb = xOffset;
-    xOffset = 0;
   }
 
   try {
@@ -35,8 +30,8 @@ const mask = function (
       this.bitmap.data,
       this.getWidth(),
       this.getHeight(),
-      ensureInteger(xOffset || 0),
-      ensureInteger(yOffset || 0),
+      ensureInteger(xOffset),
+      ensureInteger(yOffset),
       cppCallbackWrapper(this, cb)
     );
 
