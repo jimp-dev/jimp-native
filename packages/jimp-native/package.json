@@ -6,7 +6,6 @@
   "module": "es/index.js",
   "types": "src/index.ts",
   "scripts": {
-    "test": "node ./test/test.js",
     "clean": "rimraf ./dist ./es ./build",
     "build": "npm run clean && npm run build:node && npm run build:module",
     "build:watch": "npm run build:node:debug -- -- --watch --verbose",

@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.tsx '**/*.{js,ts}'",
     "build": "lerna run build",
-    "test": "node ./packages/jimp-native/test/test.js"
+    "test": "jest --config ./jest.config.js ./"
   },
   "keywords": [
     "image processing",

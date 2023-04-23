@@ -9,7 +9,7 @@ const bitmapDenyProxy = new Proxy(
       throw new Error(
         `Attempted to access property "${String(
           prop
-        )}" within bitmap data wile C++ thread is working on it.`
+        )}" on bitmap wile C++ thread is working on it.`
       );
     },
   }
@@ -30,12 +30,16 @@ export const cppCallbackWrapper = (
     return null;
   }
 
-  const originalBitmap = jimpImage.bitmap.data;
+  const originalBitmap = jimpImage.bitmap;
 
-  jimpImage.bitmap.data = bitmapDenyProxy as unknown as Buffer;
+  jimpImage.bitmap = bitmapDenyProxy as unknown as {
+    width: number;
+    height: number;
+    data: Buffer;
+  };
 
   return (error, ...args) => {
-    jimpImage.bitmap.data = originalBitmap;
+    jimpImage.bitmap = originalBitmap;
 
     if (typeof error === "string") {
       error = new Error(error);

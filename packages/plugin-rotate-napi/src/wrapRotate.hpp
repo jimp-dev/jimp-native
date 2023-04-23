@@ -2,4 +2,5 @@
 #include <napi.h>
 #include "referenceFactory.hpp"
 
-void wrapRotate (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory);
+void wrapAdvancedRotate (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory);
+void wrapMatrixRotate (const Napi::CallbackInfo& info, ReferenceFactory& referenceFactory);
