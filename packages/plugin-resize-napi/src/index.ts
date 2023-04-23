@@ -91,9 +91,21 @@ function resize(
   }
 }
 
-const plugin: () => PluginResize = () => ({
-  resize,
-  resizeAsync: wrapAsync(resize),
+const plugin: () => {
+  constants: Resize["constants"];
+  class: PluginResize;
+} = () => ({
+  constants: {
+    RESIZE_NEAREST_NEIGHBOR: "nearestNeighbor",
+    RESIZE_BILINEAR: "bilinearInterpolation",
+    RESIZE_BICUBIC: "bicubicInterpolation",
+    RESIZE_HERMITE: "hermiteInterpolation",
+    RESIZE_BEZIER: "bezierInterpolation",
+  },
+  class: {
+    resize,
+    resizeAsync: wrapAsync(resize),
+  },
 });
 
 export default plugin;
