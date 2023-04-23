@@ -10,3 +10,7 @@ build/
 benchmark/
 examples/
 *.tgz
+**/*.spec.ts*
+**/*.spec.js*
+test_output/
+coverage/
