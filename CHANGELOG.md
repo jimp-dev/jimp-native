@@ -1,6 +1,12 @@
 
 # Changelog
 
+## V0.1.0 - 2023-04-24
+
+- Use matrix rotation when rotating by a multiple of 90 degrees
+- Moved all tests to Jest
+- Moved all tests to their respective plugin folder
+
 ## V0.1.0-alpha.8 - 2023-04-15
 
 - Fixed build issues on Windows
