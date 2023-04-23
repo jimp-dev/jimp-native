@@ -23,3 +23,6 @@ es/
 # Binding gypi files that get auto-generated
 packages/**/binding.gypi
 !packages/utils-napi/binding.gypi
+
+# Log files
+*.log
