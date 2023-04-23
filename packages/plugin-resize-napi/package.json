@@ -1,13 +1,12 @@
 {
   "name": "@jimp-native/plugin-resize-napi",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0",
   "description": "C++ implementation of plugin-resize using the Node Addon API",
   "main": "dist/index.js",
   "types": "src/index.ts",
   "module": "es/index.js",
   "scripts": {
     "test": "jest --config ../../jest.config.js ./src --rootDir \".\" --coverage --collectCoverageFrom \"<rootDir>/**/*.ts\"",
-
     "postinstall": "npm run build:cpp",
     "clean": "rimraf ./dist ./es ./build",
     "build": "npm run clean && npm run build:node && npm run build:module && npm run build:cpp",
@@ -20,10 +19,10 @@
     "build:node": "babel src -d dist --source-maps --extensions \".ts\" --config-file ../../babel.config.js"
   },
   "dependencies": {
-    "@jimp-native/plugin-resize-cpp": "^0.1.0-alpha.8",
-    "@jimp-native/utils-cpp": "^0.1.0-alpha.8",
-    "@jimp-native/utils-napi": "^0.1.0-alpha.8",
-    "@jimp-native/utils-ts": "^0.1.0-alpha.8",
+    "@jimp-native/plugin-resize-cpp": "^0.1.0",
+    "@jimp-native/utils-cpp": "^0.1.0",
+    "@jimp-native/utils-napi": "^0.1.0",
+    "@jimp-native/utils-ts": "^0.1.0",
     "@jimp/utils": "^0.22.7",
     "jimp": "^0.22.7"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@jimp-native/plugin-blur-cpp",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0",
   "description": "Platform agnostic C++ implementation of plugin-blur",
   "main": "index.js",
   "scripts": {
